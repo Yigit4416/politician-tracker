@@ -1,0 +1,22 @@
+[     269ms] Error: Minified React error #425; visit https://react.dev/errors/425 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at sq (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:146769)
+    at co (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:158783)
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:99420
+    at iu (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:103871)
+    at ia (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:95227)
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:94988
+    at il (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:94995)
+    at nb (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:26776)
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:108301
+    at is (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:108309)
+[     269ms] Error: Minified React error #422; visit https://react.dev/errors/422 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:63991
+    at lZ (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:65342)
+    at iZ (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:121137)
+    at ia (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:95166)
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:94988
+    at il (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:94995)
+    at nb (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:26776)
+    at https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:108301
+    at is (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:108309)
+    at o1 (https://www.capitoltrades.com/_next/static/chunks/c7d67276-ee1c7108cb92a160.js:1:93001)

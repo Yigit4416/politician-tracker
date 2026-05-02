@@ -1,0 +1,728 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - navigation [ref=e5]:
+      - generic [ref=e6]:
+        - link "Go to site's root page." [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img [ref=e9]
+        - generic [ref=e14]: Capitol Trades
+      - generic [ref=e15]:
+        - link "Trades" [ref=e16] [cursor=pointer]:
+          - /url: /trades
+        - link "Politicians" [ref=e17] [cursor=pointer]:
+          - /url: /politicians
+        - link "Issuers" [ref=e18] [cursor=pointer]:
+          - /url: /issuers
+        - link "Insights" [ref=e19] [cursor=pointer]:
+          - /url: /articles
+        - link "Buzz" [ref=e20] [cursor=pointer]:
+          - /url: /buzz
+        - link "Press" [ref=e21] [cursor=pointer]:
+          - /url: /press
+        - link "More More" [ref=e22] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e23]:
+            - text: More
+            - img [ref=e24]
+          - generic [ref=e26]: More
+  - main [ref=e27]:
+    - main [ref=e28]:
+      - generic [ref=e29]:
+        - img [ref=e30]
+        - heading "trades" [level=1] [ref=e32]
+        - generic [ref=e35]:
+          - generic [ref=e36]: 3 YEARS
+          - img [ref=e38]
+        - img [ref=e44]
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e50]:
+            - textbox "Find by politician" [ref=e51]
+            - img [ref=e53]
+          - generic [ref=e57]:
+            - textbox "Find by issuer" [ref=e58]
+            - img [ref=e60]
+        - generic [ref=e62]:
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - generic [ref=e65]: 35,184
+              - generic [ref=e66]: Trades
+            - figure [ref=e67]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e71]: 1,733
+              - generic [ref=e72]: Filings
+            - figure [ref=e73]
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - generic [ref=e77]: $2.313B
+              - generic [ref=e78]: Volume
+            - figure [ref=e79]
+          - generic [ref=e81]:
+            - generic [ref=e82]:
+              - generic [ref=e83]: "198"
+              - generic [ref=e84]: Politicians
+            - figure [ref=e85]
+          - generic [ref=e87]:
+            - generic [ref=e88]:
+              - generic [ref=e89]: 3,053
+              - generic [ref=e90]: Issuers
+            - figure [ref=e91]
+        - generic [ref=e93]:
+          - table [ref=e96]:
+            - rowgroup [ref=e97]:
+              - row "Politician Traded Issuer Published Traded Filed After Owner Type Size Price" [ref=e98]:
+                - columnheader "Politician" [ref=e99]:
+                  - generic [ref=e100]:
+                    - generic [ref=e101]: Politician
+                    - button [ref=e102] [cursor=pointer]:
+                      - img [ref=e103]
+                - columnheader "Traded Issuer" [ref=e106]:
+                  - generic [ref=e107]:
+                    - generic [ref=e108]: Traded Issuer
+                    - button [ref=e109] [cursor=pointer]:
+                      - img [ref=e110]
+                - columnheader "Published" [ref=e113]:
+                  - generic [ref=e114]:
+                    - generic [ref=e115]: Published
+                    - button [ref=e116] [cursor=pointer]:
+                      - img [ref=e117]
+                - columnheader "Traded" [ref=e120]:
+                  - generic [ref=e121]:
+                    - generic [ref=e122]: Traded
+                    - button [ref=e123] [cursor=pointer]:
+                      - img [ref=e124]
+                - columnheader "Filed After" [ref=e127]:
+                  - generic [ref=e128]:
+                    - generic [ref=e129]: Filed After
+                    - button [ref=e130] [cursor=pointer]:
+                      - img [ref=e131]
+                - columnheader "Owner" [ref=e134]:
+                  - generic [ref=e135]:
+                    - generic [ref=e136]: Owner
+                    - button [ref=e137] [cursor=pointer]:
+                      - img [ref=e138]
+                - columnheader "Type" [ref=e141]:
+                  - generic [ref=e142]:
+                    - generic [ref=e143]: Type
+                    - button [ref=e144] [cursor=pointer]:
+                      - img [ref=e145]
+                - columnheader "Size" [ref=e148]:
+                  - generic [ref=e149]:
+                    - generic [ref=e150]: Size
+                    - button [ref=e151] [cursor=pointer]:
+                      - img [ref=e152]
+                - columnheader "Price" [ref=e155]:
+                  - generic [ref=e156]:
+                    - generic [ref=e157]: Price
+                    - button [ref=e158] [cursor=pointer]:
+                      - img [ref=e159]
+                - columnheader [ref=e162]:
+                  - button [ref=e164] [cursor=pointer]:
+                    - img [ref=e165]
+            - rowgroup [ref=e167]:
+              - row "Mark Warner Democrat|Senate|VA iShares Russell 1000 Growth ETF IWF:US 16:15 Yesterday 13 Apr 2026 days 18 Child sell 1K–15K $452.42 Goto trade detail page." [ref=e168]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e169]:
+                  - generic [ref=e172]:
+                    - heading "Mark Warner" [level=2] [ref=e173]:
+                      - link "Mark Warner" [ref=e174] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e175]: Democrat|Senate|VA
+                - cell "iShares Russell 1000 Growth ETF IWF:US" [ref=e176]:
+                  - generic [ref=e178]:
+                    - figure [ref=e179]: i
+                    - generic [ref=e181]:
+                      - heading "iShares Russell 1000 Growth ETF" [level=3] [ref=e182]:
+                        - link "iShares Russell 1000 Growth ETF" [ref=e183] [cursor=pointer]:
+                          - /url: /issuers/432647
+                      - generic [ref=e184]: IWF:US
+                - cell "16:15 Yesterday" [ref=e185]:
+                  - generic [ref=e187]:
+                    - generic [ref=e188]: 16:15
+                    - generic [ref=e189]: Yesterday
+                - cell "13 Apr 2026" [ref=e190]:
+                  - generic [ref=e192]:
+                    - generic [ref=e193]: 13 Apr
+                    - generic [ref=e194]: "2026"
+                - cell "days 18" [ref=e195]:
+                  - generic [ref=e197]:
+                    - generic [ref=e198]: days
+                    - generic [ref=e199]: "18"
+                - cell "Child" [ref=e200]:
+                  - generic [ref=e205]: Child
+                - cell "sell" [ref=e206]:
+                  - generic [ref=e208]: sell
+                - cell "1K–15K" [ref=e209]:
+                  - generic [ref=e214]:
+                    - generic [ref=e215]:
+                      - img [ref=e217]
+                      - img [ref=e220]
+                      - img [ref=e223]
+                    - generic [ref=e225]: 1K–15K
+                - cell "$452.42" [ref=e226]:
+                  - generic [ref=e228]: $452.42
+                - cell "Goto trade detail page." [ref=e229]:
+                  - button "Goto trade detail page." [ref=e231] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e232]:
+                      - /url: /trades/10000064910
+                      - generic [ref=e233]: Goto trade detail page.
+                      - img [ref=e234]
+              - row "Mark Warner Democrat|Senate|VA iShares Russell 1000 Value ETF IWD:US 16:15 Yesterday 13 Apr 2026 days 18 Child sell 1K–15K $223.71 Goto trade detail page." [ref=e236]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e237]:
+                  - generic [ref=e240]:
+                    - heading "Mark Warner" [level=2] [ref=e241]:
+                      - link "Mark Warner" [ref=e242] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e243]: Democrat|Senate|VA
+                - cell "iShares Russell 1000 Value ETF IWD:US" [ref=e244]:
+                  - generic [ref=e246]:
+                    - figure [ref=e247]: i
+                    - generic [ref=e249]:
+                      - heading "iShares Russell 1000 Value ETF" [level=3] [ref=e250]:
+                        - link "iShares Russell 1000 Value ETF" [ref=e251] [cursor=pointer]:
+                          - /url: /issuers/432648
+                      - generic [ref=e252]: IWD:US
+                - cell "16:15 Yesterday" [ref=e253]:
+                  - generic [ref=e255]:
+                    - generic [ref=e256]: 16:15
+                    - generic [ref=e257]: Yesterday
+                - cell "13 Apr 2026" [ref=e258]:
+                  - generic [ref=e260]:
+                    - generic [ref=e261]: 13 Apr
+                    - generic [ref=e262]: "2026"
+                - cell "days 18" [ref=e263]:
+                  - generic [ref=e265]:
+                    - generic [ref=e266]: days
+                    - generic [ref=e267]: "18"
+                - cell "Child" [ref=e268]:
+                  - generic [ref=e273]: Child
+                - cell "sell" [ref=e274]:
+                  - generic [ref=e276]: sell
+                - cell "1K–15K" [ref=e277]:
+                  - generic [ref=e282]:
+                    - generic [ref=e283]:
+                      - img [ref=e285]
+                      - img [ref=e288]
+                      - img [ref=e291]
+                    - generic [ref=e293]: 1K–15K
+                - cell "$223.71" [ref=e294]:
+                  - generic [ref=e296]: $223.71
+                - cell "Goto trade detail page." [ref=e297]:
+                  - button "Goto trade detail page." [ref=e299] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e300]:
+                      - /url: /trades/10000064911
+                      - generic [ref=e301]: Goto trade detail page.
+                      - img [ref=e302]
+              - row "Mark Warner Democrat|Senate|VA Wells Fargo & Co WFC:US 16:15 Yesterday 13 Apr 2026 days 18 Child buy 1K–15K $86.64 Goto trade detail page." [ref=e304]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e305]:
+                  - generic [ref=e308]:
+                    - heading "Mark Warner" [level=2] [ref=e309]:
+                      - link "Mark Warner" [ref=e310] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e311]: Democrat|Senate|VA
+                - cell "Wells Fargo & Co WFC:US" [ref=e312]:
+                  - generic [ref=e314]:
+                    - figure [ref=e315]: W
+                    - generic [ref=e317]:
+                      - heading "Wells Fargo & Co" [level=3] [ref=e318]:
+                        - link "Wells Fargo & Co" [ref=e319] [cursor=pointer]:
+                          - /url: /issuers/1282836
+                      - generic [ref=e320]: WFC:US
+                - cell "16:15 Yesterday" [ref=e321]:
+                  - generic [ref=e323]:
+                    - generic [ref=e324]: 16:15
+                    - generic [ref=e325]: Yesterday
+                - cell "13 Apr 2026" [ref=e326]:
+                  - generic [ref=e328]:
+                    - generic [ref=e329]: 13 Apr
+                    - generic [ref=e330]: "2026"
+                - cell "days 18" [ref=e331]:
+                  - generic [ref=e333]:
+                    - generic [ref=e334]: days
+                    - generic [ref=e335]: "18"
+                - cell "Child" [ref=e336]:
+                  - generic [ref=e341]: Child
+                - cell "buy" [ref=e342]:
+                  - generic [ref=e344]: buy
+                - cell "1K–15K" [ref=e345]:
+                  - generic [ref=e350]:
+                    - generic [ref=e351]:
+                      - img [ref=e353]
+                      - img [ref=e356]
+                      - img [ref=e359]
+                    - generic [ref=e361]: 1K–15K
+                - cell "$86.64" [ref=e362]:
+                  - generic [ref=e364]: $86.64
+                - cell "Goto trade detail page." [ref=e365]:
+                  - button "Goto trade detail page." [ref=e367] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e368]:
+                      - /url: /trades/10000064912
+                      - generic [ref=e369]: Goto trade detail page.
+                      - img [ref=e370]
+              - row "Mark Warner Democrat|Senate|VA Microsoft Corp MSFT:US 16:15 Yesterday 13 Apr 2026 days 18 Child buy 1K–15K $384.37 Goto trade detail page." [ref=e372]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e373]:
+                  - generic [ref=e376]:
+                    - heading "Mark Warner" [level=2] [ref=e377]:
+                      - link "Mark Warner" [ref=e378] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e379]: Democrat|Senate|VA
+                - cell "Microsoft Corp MSFT:US" [ref=e380]:
+                  - generic [ref=e382]:
+                    - figure [ref=e383]: M
+                    - generic [ref=e385]:
+                      - heading "Microsoft Corp" [level=3] [ref=e386]:
+                        - link "Microsoft Corp" [ref=e387] [cursor=pointer]:
+                          - /url: /issuers/433382
+                      - generic [ref=e388]: MSFT:US
+                - cell "16:15 Yesterday" [ref=e389]:
+                  - generic [ref=e391]:
+                    - generic [ref=e392]: 16:15
+                    - generic [ref=e393]: Yesterday
+                - cell "13 Apr 2026" [ref=e394]:
+                  - generic [ref=e396]:
+                    - generic [ref=e397]: 13 Apr
+                    - generic [ref=e398]: "2026"
+                - cell "days 18" [ref=e399]:
+                  - generic [ref=e401]:
+                    - generic [ref=e402]: days
+                    - generic [ref=e403]: "18"
+                - cell "Child" [ref=e404]:
+                  - generic [ref=e409]: Child
+                - cell "buy" [ref=e410]:
+                  - generic [ref=e412]: buy
+                - cell "1K–15K" [ref=e413]:
+                  - generic [ref=e418]:
+                    - generic [ref=e419]:
+                      - img [ref=e421]
+                      - img [ref=e424]
+                      - img [ref=e427]
+                    - generic [ref=e429]: 1K–15K
+                - cell "$384.37" [ref=e430]:
+                  - generic [ref=e432]: $384.37
+                - cell "Goto trade detail page." [ref=e433]:
+                  - button "Goto trade detail page." [ref=e435] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e436]:
+                      - /url: /trades/10000064913
+                      - generic [ref=e437]: Goto trade detail page.
+                      - img [ref=e438]
+              - row "Mark Warner Democrat|Senate|VA Honeywell International Inc HON:US 16:15 Yesterday 20 Mar 2026 days 42 Joint sell 1K–15K $221.50 Goto trade detail page." [ref=e440]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e441]:
+                  - generic [ref=e444]:
+                    - heading "Mark Warner" [level=2] [ref=e445]:
+                      - link "Mark Warner" [ref=e446] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e447]: Democrat|Senate|VA
+                - cell "Honeywell International Inc HON:US" [ref=e448]:
+                  - generic [ref=e450]:
+                    - figure [ref=e451]: H
+                    - generic [ref=e453]:
+                      - heading "Honeywell International Inc" [level=3] [ref=e454]:
+                        - link "Honeywell International Inc" [ref=e455] [cursor=pointer]:
+                          - /url: /issuers/432298
+                      - generic [ref=e456]: HON:US
+                - cell "16:15 Yesterday" [ref=e457]:
+                  - generic [ref=e459]:
+                    - generic [ref=e460]: 16:15
+                    - generic [ref=e461]: Yesterday
+                - cell "20 Mar 2026" [ref=e462]:
+                  - generic [ref=e464]:
+                    - generic [ref=e465]: 20 Mar
+                    - generic [ref=e466]: "2026"
+                - cell "days 42" [ref=e467]:
+                  - generic [ref=e469]:
+                    - generic [ref=e470]: days
+                    - generic [ref=e471]: "42"
+                - cell "Joint" [ref=e472]:
+                  - generic [ref=e477]: Joint
+                - cell "sell" [ref=e478]:
+                  - generic [ref=e480]: sell
+                - cell "1K–15K" [ref=e481]:
+                  - generic [ref=e486]:
+                    - generic [ref=e487]:
+                      - img [ref=e489]
+                      - img [ref=e492]
+                      - img [ref=e495]
+                    - generic [ref=e497]: 1K–15K
+                - cell "$221.50" [ref=e498]:
+                  - generic [ref=e500]: $221.50
+                - cell "Goto trade detail page." [ref=e501]:
+                  - button "Goto trade detail page." [ref=e503] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e504]:
+                      - /url: /trades/10000064914
+                      - generic [ref=e505]: Goto trade detail page.
+                      - img [ref=e506]
+              - row "Mark Warner Democrat|Senate|VA Cheniere Energy Inc LNG:US 16:15 Yesterday 20 Mar 2026 days 42 Joint sell 1K–15K $280.89 Goto trade detail page." [ref=e508]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e509]:
+                  - generic [ref=e512]:
+                    - heading "Mark Warner" [level=2] [ref=e513]:
+                      - link "Mark Warner" [ref=e514] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e515]: Democrat|Senate|VA
+                - cell "Cheniere Energy Inc LNG:US" [ref=e516]:
+                  - generic [ref=e518]:
+                    - figure [ref=e519]: C
+                    - generic [ref=e521]:
+                      - heading "Cheniere Energy Inc" [level=3] [ref=e522]:
+                        - link "Cheniere Energy Inc" [ref=e523] [cursor=pointer]:
+                          - /url: /issuers/430509
+                      - generic [ref=e524]: LNG:US
+                - cell "16:15 Yesterday" [ref=e525]:
+                  - generic [ref=e527]:
+                    - generic [ref=e528]: 16:15
+                    - generic [ref=e529]: Yesterday
+                - cell "20 Mar 2026" [ref=e530]:
+                  - generic [ref=e532]:
+                    - generic [ref=e533]: 20 Mar
+                    - generic [ref=e534]: "2026"
+                - cell "days 42" [ref=e535]:
+                  - generic [ref=e537]:
+                    - generic [ref=e538]: days
+                    - generic [ref=e539]: "42"
+                - cell "Joint" [ref=e540]:
+                  - generic [ref=e545]: Joint
+                - cell "sell" [ref=e546]:
+                  - generic [ref=e548]: sell
+                - cell "1K–15K" [ref=e549]:
+                  - generic [ref=e554]:
+                    - generic [ref=e555]:
+                      - img [ref=e557]
+                      - img [ref=e560]
+                      - img [ref=e563]
+                    - generic [ref=e565]: 1K–15K
+                - cell "$280.89" [ref=e566]:
+                  - generic [ref=e568]: $280.89
+                - cell "Goto trade detail page." [ref=e569]:
+                  - button "Goto trade detail page." [ref=e571] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e572]:
+                      - /url: /trades/10000064915
+                      - generic [ref=e573]: Goto trade detail page.
+                      - img [ref=e574]
+              - row "Mark Warner Democrat|Senate|VA Apple Inc AAPL:US 16:15 Yesterday 20 Mar 2026 days 42 Joint buy 1K–15K $247.99 Goto trade detail page." [ref=e576]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e577]:
+                  - generic [ref=e580]:
+                    - heading "Mark Warner" [level=2] [ref=e581]:
+                      - link "Mark Warner" [ref=e582] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e583]: Democrat|Senate|VA
+                - cell "Apple Inc AAPL:US" [ref=e584]:
+                  - generic [ref=e586]:
+                    - figure [ref=e587]: A
+                    - generic [ref=e589]:
+                      - heading "Apple Inc" [level=3] [ref=e590]:
+                        - link "Apple Inc" [ref=e591] [cursor=pointer]:
+                          - /url: /issuers/429789
+                      - generic [ref=e592]: AAPL:US
+                - cell "16:15 Yesterday" [ref=e593]:
+                  - generic [ref=e595]:
+                    - generic [ref=e596]: 16:15
+                    - generic [ref=e597]: Yesterday
+                - cell "20 Mar 2026" [ref=e598]:
+                  - generic [ref=e600]:
+                    - generic [ref=e601]: 20 Mar
+                    - generic [ref=e602]: "2026"
+                - cell "days 42" [ref=e603]:
+                  - generic [ref=e605]:
+                    - generic [ref=e606]: days
+                    - generic [ref=e607]: "42"
+                - cell "Joint" [ref=e608]:
+                  - generic [ref=e613]: Joint
+                - cell "buy" [ref=e614]:
+                  - generic [ref=e616]: buy
+                - cell "1K–15K" [ref=e617]:
+                  - generic [ref=e622]:
+                    - generic [ref=e623]:
+                      - img [ref=e625]
+                      - img [ref=e628]
+                      - img [ref=e631]
+                    - generic [ref=e633]: 1K–15K
+                - cell "$247.99" [ref=e634]:
+                  - generic [ref=e636]: $247.99
+                - cell "Goto trade detail page." [ref=e637]:
+                  - button "Goto trade detail page." [ref=e639] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e640]:
+                      - /url: /trades/10000064916
+                      - generic [ref=e641]: Goto trade detail page.
+                      - img [ref=e642]
+              - row "Mark Warner Democrat|Senate|VA Fifth Third Bancorp FITB:US 16:15 Yesterday 20 Mar 2026 days 42 Joint buy 1K–15K $44.19 Goto trade detail page." [ref=e644]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e645]:
+                  - generic [ref=e648]:
+                    - heading "Mark Warner" [level=2] [ref=e649]:
+                      - link "Mark Warner" [ref=e650] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e651]: Democrat|Senate|VA
+                - cell "Fifth Third Bancorp FITB:US" [ref=e652]:
+                  - generic [ref=e654]:
+                    - figure [ref=e655]: F
+                    - generic [ref=e657]:
+                      - heading "Fifth Third Bancorp" [level=3] [ref=e658]:
+                        - link "Fifth Third Bancorp" [ref=e659] [cursor=pointer]:
+                          - /url: /issuers/431687
+                      - generic [ref=e660]: FITB:US
+                - cell "16:15 Yesterday" [ref=e661]:
+                  - generic [ref=e663]:
+                    - generic [ref=e664]: 16:15
+                    - generic [ref=e665]: Yesterday
+                - cell "20 Mar 2026" [ref=e666]:
+                  - generic [ref=e668]:
+                    - generic [ref=e669]: 20 Mar
+                    - generic [ref=e670]: "2026"
+                - cell "days 42" [ref=e671]:
+                  - generic [ref=e673]:
+                    - generic [ref=e674]: days
+                    - generic [ref=e675]: "42"
+                - cell "Joint" [ref=e676]:
+                  - generic [ref=e681]: Joint
+                - cell "buy" [ref=e682]:
+                  - generic [ref=e684]: buy
+                - cell "1K–15K" [ref=e685]:
+                  - generic [ref=e690]:
+                    - generic [ref=e691]:
+                      - img [ref=e693]
+                      - img [ref=e696]
+                      - img [ref=e699]
+                    - generic [ref=e701]: 1K–15K
+                - cell "$44.19" [ref=e702]:
+                  - generic [ref=e704]: $44.19
+                - cell "Goto trade detail page." [ref=e705]:
+                  - button "Goto trade detail page." [ref=e707] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e708]:
+                      - /url: /trades/10000064917
+                      - generic [ref=e709]: Goto trade detail page.
+                      - img [ref=e710]
+              - row "Mark Warner Democrat|Senate|VA iShares Russell 1000 Value ETF IWD:US 16:15 Yesterday 23 Mar 2026 days 39 Joint buy 1K–15K $213.13 Goto trade detail page." [ref=e712]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e713]:
+                  - generic [ref=e716]:
+                    - heading "Mark Warner" [level=2] [ref=e717]:
+                      - link "Mark Warner" [ref=e718] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e719]: Democrat|Senate|VA
+                - cell "iShares Russell 1000 Value ETF IWD:US" [ref=e720]:
+                  - generic [ref=e722]:
+                    - figure [ref=e723]: i
+                    - generic [ref=e725]:
+                      - heading "iShares Russell 1000 Value ETF" [level=3] [ref=e726]:
+                        - link "iShares Russell 1000 Value ETF" [ref=e727] [cursor=pointer]:
+                          - /url: /issuers/432648
+                      - generic [ref=e728]: IWD:US
+                - cell "16:15 Yesterday" [ref=e729]:
+                  - generic [ref=e731]:
+                    - generic [ref=e732]: 16:15
+                    - generic [ref=e733]: Yesterday
+                - cell "23 Mar 2026" [ref=e734]:
+                  - generic [ref=e736]:
+                    - generic [ref=e737]: 23 Mar
+                    - generic [ref=e738]: "2026"
+                - cell "days 39" [ref=e739]:
+                  - generic [ref=e741]:
+                    - generic [ref=e742]: days
+                    - generic [ref=e743]: "39"
+                - cell "Joint" [ref=e744]:
+                  - generic [ref=e749]: Joint
+                - cell "buy" [ref=e750]:
+                  - generic [ref=e752]: buy
+                - cell "1K–15K" [ref=e753]:
+                  - generic [ref=e758]:
+                    - generic [ref=e759]:
+                      - img [ref=e761]
+                      - img [ref=e764]
+                      - img [ref=e767]
+                    - generic [ref=e769]: 1K–15K
+                - cell "$213.13" [ref=e770]:
+                  - generic [ref=e772]: $213.13
+                - cell "Goto trade detail page." [ref=e773]:
+                  - button "Goto trade detail page." [ref=e775] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e776]:
+                      - /url: /trades/10000064918
+                      - generic [ref=e777]: Goto trade detail page.
+                      - img [ref=e778]
+              - row "Mark Warner Democrat|Senate|VA FIRST TR TACTICAL HI YLD ETF HYLS:US 16:15 Yesterday 30 Mar 2026 days 32 Joint sell 15K–50K $40.09 Goto trade detail page." [ref=e780]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e781]:
+                  - generic [ref=e784]:
+                    - heading "Mark Warner" [level=2] [ref=e785]:
+                      - link "Mark Warner" [ref=e786] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e787]: Democrat|Senate|VA
+                - cell "FIRST TR TACTICAL HI YLD ETF HYLS:US" [ref=e788]:
+                  - generic [ref=e790]:
+                    - figure [ref=e791]: F
+                    - generic [ref=e793]:
+                      - heading "FIRST TR TACTICAL HI YLD ETF" [level=3] [ref=e794]:
+                        - link "FIRST TR TACTICAL HI YLD ETF" [ref=e795] [cursor=pointer]:
+                          - /url: /issuers/2335395
+                      - generic [ref=e796]: HYLS:US
+                - cell "16:15 Yesterday" [ref=e797]:
+                  - generic [ref=e799]:
+                    - generic [ref=e800]: 16:15
+                    - generic [ref=e801]: Yesterday
+                - cell "30 Mar 2026" [ref=e802]:
+                  - generic [ref=e804]:
+                    - generic [ref=e805]: 30 Mar
+                    - generic [ref=e806]: "2026"
+                - cell "days 32" [ref=e807]:
+                  - generic [ref=e809]:
+                    - generic [ref=e810]: days
+                    - generic [ref=e811]: "32"
+                - cell "Joint" [ref=e812]:
+                  - generic [ref=e817]: Joint
+                - cell "sell" [ref=e818]:
+                  - generic [ref=e820]: sell
+                - cell "15K–50K" [ref=e821]:
+                  - generic [ref=e826]:
+                    - generic [ref=e827]:
+                      - img [ref=e829]
+                      - img [ref=e832]
+                      - img [ref=e835]
+                    - generic [ref=e837]: 15K–50K
+                - cell "$40.09" [ref=e838]:
+                  - generic [ref=e840]: $40.09
+                - cell "Goto trade detail page." [ref=e841]:
+                  - button "Goto trade detail page." [ref=e843] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e844]:
+                      - /url: /trades/10000064919
+                      - generic [ref=e845]: Goto trade detail page.
+                      - img [ref=e846]
+              - row "Mark Warner Democrat|Senate|VA FIRST TRUST SMITH OPPRTNY FI FIXD:US 16:15 Yesterday 30 Mar 2026 days 32 Joint sell 1K–15K $43.43 Goto trade detail page." [ref=e848]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e849]:
+                  - generic [ref=e852]:
+                    - heading "Mark Warner" [level=2] [ref=e853]:
+                      - link "Mark Warner" [ref=e854] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e855]: Democrat|Senate|VA
+                - cell "FIRST TRUST SMITH OPPRTNY FI FIXD:US" [ref=e856]:
+                  - generic [ref=e858]:
+                    - figure [ref=e859]: F
+                    - generic [ref=e861]:
+                      - heading "FIRST TRUST SMITH OPPRTNY FI" [level=3] [ref=e862]:
+                        - link "FIRST TRUST SMITH OPPRTNY FI" [ref=e863] [cursor=pointer]:
+                          - /url: /issuers/2333968
+                      - generic [ref=e864]: FIXD:US
+                - cell "16:15 Yesterday" [ref=e865]:
+                  - generic [ref=e867]:
+                    - generic [ref=e868]: 16:15
+                    - generic [ref=e869]: Yesterday
+                - cell "30 Mar 2026" [ref=e870]:
+                  - generic [ref=e872]:
+                    - generic [ref=e873]: 30 Mar
+                    - generic [ref=e874]: "2026"
+                - cell "days 32" [ref=e875]:
+                  - generic [ref=e877]:
+                    - generic [ref=e878]: days
+                    - generic [ref=e879]: "32"
+                - cell "Joint" [ref=e880]:
+                  - generic [ref=e885]: Joint
+                - cell "sell" [ref=e886]:
+                  - generic [ref=e888]: sell
+                - cell "1K–15K" [ref=e889]:
+                  - generic [ref=e894]:
+                    - generic [ref=e895]:
+                      - img [ref=e897]
+                      - img [ref=e900]
+                      - img [ref=e903]
+                    - generic [ref=e905]: 1K–15K
+                - cell "$43.43" [ref=e906]:
+                  - generic [ref=e908]: $43.43
+                - cell "Goto trade detail page." [ref=e909]:
+                  - button "Goto trade detail page." [ref=e911] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e912]:
+                      - /url: /trades/10000064920
+                      - generic [ref=e913]: Goto trade detail page.
+                      - img [ref=e914]
+              - row "Mark Warner Democrat|Senate|VA First Trust Preferred Securities and Income ETF FPE:US 16:15 Yesterday 30 Mar 2026 days 32 Joint sell 1K–15K $17.62 Goto trade detail page." [ref=e916]:
+                - cell "Mark Warner Democrat|Senate|VA" [ref=e917]:
+                  - generic [ref=e920]:
+                    - heading "Mark Warner" [level=2] [ref=e921]:
+                      - link "Mark Warner" [ref=e922] [cursor=pointer]:
+                        - /url: /politicians/W000805
+                    - generic [ref=e923]: Democrat|Senate|VA
+                - cell "First Trust Preferred Securities and Income ETF FPE:US" [ref=e924]:
+                  - generic [ref=e926]:
+                    - figure [ref=e927]: F
+                    - generic [ref=e929]:
+                      - heading "First Trust Preferred Securities and Income ETF" [level=3] [ref=e930]:
+                        - link "First Trust Preferred Securities and Income ETF" [ref=e931] [cursor=pointer]:
+                          - /url: /issuers/431763
+                      - generic [ref=e932]: FPE:US
+                - cell "16:15 Yesterday" [ref=e933]:
+                  - generic [ref=e935]:
+                    - generic [ref=e936]: 16:15
+                    - generic [ref=e937]: Yesterday
+                - cell "30 Mar 2026" [ref=e938]:
+                  - generic [ref=e940]:
+                    - generic [ref=e941]: 30 Mar
+                    - generic [ref=e942]: "2026"
+                - cell "days 32" [ref=e943]:
+                  - generic [ref=e945]:
+                    - generic [ref=e946]: days
+                    - generic [ref=e947]: "32"
+                - cell "Joint" [ref=e948]:
+                  - generic [ref=e953]: Joint
+                - cell "sell" [ref=e954]:
+                  - generic [ref=e956]: sell
+                - cell "1K–15K" [ref=e957]:
+                  - generic [ref=e962]:
+                    - generic [ref=e963]:
+                      - img [ref=e965]
+                      - img [ref=e968]
+                      - img [ref=e971]
+                    - generic [ref=e973]: 1K–15K
+                - cell "$17.62" [ref=e974]:
+                  - generic [ref=e976]: $17.62
+                - cell "Goto trade detail page." [ref=e977]:
+                  - button "Goto trade detail page." [ref=e979] [cursor=pointer]:
+                    - link "Goto trade detail page." [ref=e980]:
+                      - /url: /trades/10000064921
+                      - generic [ref=e981]: Goto trade detail page.
+                      - img [ref=e982]
+          - generic [ref=e984]:
+            - generic [ref=e985]:
+              - button "Go to first page" [disabled]:
+                - link "Go to first page":
+                  - /url: /trades?page=1
+                  - img
+              - button "Go to previous page" [disabled]:
+                - link "Go to previous page":
+                  - /url: /trades?page=0
+                  - img
+              - paragraph [ref=e986]: Page 1 of 2932
+              - button "Go to next page" [ref=e987] [cursor=pointer]:
+                - link "Go to next page" [ref=e988]:
+                  - /url: /trades?page=2
+                  - img [ref=e989]
+              - button "Go to last page" [ref=e991] [cursor=pointer]:
+                - link "Go to last page" [ref=e992]:
+                  - /url: /trades?page=2932
+                  - img [ref=e993]
+            - generic [ref=e995]:
+              - generic [ref=e996]: Show
+              - generic [ref=e998]:
+                - generic [ref=e999]: "12"
+                - img [ref=e1001]
+  - contentinfo [ref=e1003]:
+    - generic [ref=e1004]:
+      - generic [ref=e1005]:
+        - link "Go to site's root page." [ref=e1007] [cursor=pointer]:
+          - /url: /
+          - img [ref=e1008]
+        - link "Go to 2iQ Research home page" [ref=e1014] [cursor=pointer]:
+          - /url: https://www.2iqresearch.com/
+      - paragraph [ref=e1016]: "*The historical data available on our website is restricted to the past 3 years."
+      - navigation [ref=e1018]:
+        - link "Follow" [ref=e1019] [cursor=pointer]:
+          - /url: https://twitter.com/capitol2iq
+          - img [ref=e1020]
+          - generic [ref=e1022]: Follow
+        - link "About Us" [ref=e1023] [cursor=pointer]:
+          - /url: /about-us
+        - link "Download PressKit" [ref=e1024] [cursor=pointer]:
+          - /url: https://static.2iq.eu/press/capitoltrades-presskit.zip
+        - link "Sitemap" [ref=e1025] [cursor=pointer]:
+          - /url: /sitemap
+        - link "Privacy Policy" [ref=e1026] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Terms & Conditions" [ref=e1027] [cursor=pointer]:
+          - /url: /terms-and-conditions
+        - link "Imprint" [ref=e1028] [cursor=pointer]:
+          - /url: /imprint
+        - link "Disclaimer" [ref=e1029] [cursor=pointer]:
+          - /url: /disclaimer
+      - paragraph [ref=e1030]: © 2026 2iQ Research

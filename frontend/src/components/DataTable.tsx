@@ -27,6 +27,7 @@ type DataTableProps<TData, TValue> = {
   emptyMessage: string;
   filterColumn?: string;
   filterPlaceholder?: string;
+  mobileLabels?: Record<string, string>;
 };
 
 export function DataTable<TData, TValue>({
@@ -35,6 +36,7 @@ export function DataTable<TData, TValue>({
   emptyMessage,
   filterColumn,
   filterPlaceholder = "Filter...",
+  mobileLabels = {},
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -62,7 +64,7 @@ export function DataTable<TData, TValue>({
     <div className="space-y-3">
       {filterColumn ? (
         <input
-          className="h-8 w-full max-w-xs border border-input bg-background px-2 text-xs outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring/50"
+          className="h-9 w-full border border-input bg-background px-2 text-xs outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring/50 sm:max-w-xs"
           placeholder={filterPlaceholder}
           value={filterValue}
           onChange={(event) =>
@@ -71,7 +73,33 @@ export function DataTable<TData, TValue>({
         />
       ) : null}
 
-      <div className="overflow-hidden border border-border bg-card text-card-foreground">
+      <div className="grid gap-3 md:hidden">
+        {table.getRowModel().rows.length ? (
+          table.getRowModel().rows.map((row) => (
+            <div
+              key={row.id}
+              className="grid gap-3 border border-border bg-card p-3 text-card-foreground"
+            >
+              {row.getVisibleCells().map((cell) => (
+                <div key={cell.id} className="grid gap-1">
+                  <div className="text-[11px] uppercase tracking-normal text-muted-foreground">
+                    {mobileLabels[cell.column.id] ?? cell.column.id}
+                  </div>
+                  <div className="min-w-0 break-words text-sm">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))
+        ) : (
+          <div className="border border-border bg-card p-6 text-center text-sm text-muted-foreground">
+            {emptyMessage}
+          </div>
+        )}
+      </div>
+
+      <div className="hidden overflow-hidden border border-border bg-card text-card-foreground md:block">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -122,7 +150,7 @@ export function DataTable<TData, TValue>({
           Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount() || 1}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
           <Button
             variant="outline"
             size="sm"

@@ -97,9 +97,11 @@ export function PoliticiansPage() {
   const politicians = (query.data ?? []) as PoliticianRow[];
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="mb-6 flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold tracking-normal">Politicians</h1>
+        <h1 className="text-xl font-semibold tracking-normal sm:text-2xl">
+          Politicians
+        </h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
           Browse tracked politicians and their basic filing metadata.
         </p>
@@ -120,6 +122,14 @@ export function PoliticiansPage() {
           emptyMessage="No politicians found."
           filterColumn="name"
           filterPlaceholder="Filter politicians..."
+          mobileLabels={{
+            name: "Name",
+            party: "Party",
+            chamber: "Chamber",
+            tradeCount: "Trades",
+            lastTradeDate: "Last Trade",
+            id: "ID",
+          }}
         />
       )}
     </main>

@@ -1,6 +1,7 @@
 import { ArrowLeft } from "@phosphor-icons/react";
 import { Link, useParams } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { useCallback, useSyncExternalStore } from "react";
 import {
   CartesianGrid,
   Line,
@@ -39,6 +40,13 @@ function addDays(date: string, days: number) {
 function formatDate(value: string | Date) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(new Date(value));
+}
+
+function formatChartDate(value: string | Date) {
+  return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
   }).format(new Date(value));
@@ -83,6 +91,26 @@ function getLatestPrice(points: PricePoint[]) {
   return points.at(-1)?.close;
 }
 
+function useMediaQuery(query: string) {
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      const mediaQuery = window.matchMedia(query);
+      mediaQuery.addEventListener("change", onStoreChange);
+
+      return () => {
+        mediaQuery.removeEventListener("change", onStoreChange);
+      };
+    },
+    [query],
+  );
+
+  const getSnapshot = useCallback(() => {
+    return window.matchMedia(query).matches;
+  }, [query]);
+
+  return useSyncExternalStore(subscribe, getSnapshot, () => false);
+}
+
 function toPricePoints(data: Awaited<ReturnType<typeof fetch>> | unknown) {
   const yahooData = data as {
     chart?: {
@@ -117,6 +145,7 @@ function toPricePoints(data: Awaited<ReturnType<typeof fetch>> | unknown) {
 }
 
 export function TradeDetailPage() {
+  const isWideChart = useMediaQuery("(min-width: 640px)");
   const { tradeId } = useParams({ from: "/trades/$tradeId" });
   const tradeQuery = useQuery(tradeQueryOptions(tradeId));
   const trade = tradeQuery.data;
@@ -150,8 +179,8 @@ export function TradeDetailPage() {
   const tradeToPublished = formatReturn(tradeClose, publishedClose);
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
-      <div className="mb-6 flex items-center justify-between gap-4">
+    <main className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
+      <div className="mb-5 flex items-center justify-between gap-4 sm:mb-6">
         <div className="flex flex-col gap-2">
           <Button asChild variant="ghost" size="sm" className="w-fit">
             <Link to="/all-trades">
@@ -159,7 +188,7 @@ export function TradeDetailPage() {
               Trades
             </Link>
           </Button>
-          <h1 className="text-2xl font-semibold tracking-normal">
+          <h1 className="text-xl font-semibold tracking-normal sm:text-2xl">
             Trade Detail
           </h1>
         </div>
@@ -174,17 +203,17 @@ export function TradeDetailPage() {
           {tradeQuery.error.message}
         </div>
       ) : trade ? (
-        <div className="space-y-6">
-          <section className="grid gap-3 border border-border bg-card p-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
-            <div>
+        <div className="space-y-5 sm:space-y-6">
+          <section className="grid gap-3 border border-border bg-card p-3 text-sm sm:grid-cols-2 sm:p-4 lg:grid-cols-4">
+            <div className="min-w-0">
               <div className="text-muted-foreground">Politician</div>
-              <div className="font-medium">
+              <div className="break-words font-medium">
                 {trade.politicianFirstName} {trade.politicianLastName}
               </div>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-muted-foreground">Issuer</div>
-              <div className="font-medium">{trade.issuerName}</div>
+              <div className="break-words font-medium">{trade.issuerName}</div>
             </div>
             <div>
               <div className="text-muted-foreground">Trade Date</div>
@@ -200,13 +229,13 @@ export function TradeDetailPage() {
 
           {ticker ? (
             <>
-              <section className="grid gap-3 sm:grid-cols-3">
+              <section className="grid gap-2 min-[420px]:grid-cols-3 sm:gap-3">
                 <PriceMetric title="Bought close" value={tradeClose} />
                 <PriceMetric title="Published close" value={publishedClose} />
                 <PriceMetric title="Current close" value={latestClose} />
               </section>
 
-              <section className="grid gap-3 sm:grid-cols-3">
+              <section className="grid gap-2 min-[420px]:grid-cols-3 sm:gap-3">
                 <ReturnMetric title="Trade to today" value={tradeToToday} />
                 <ReturnMetric
                   title="Published to today"
@@ -218,8 +247,8 @@ export function TradeDetailPage() {
                 />
               </section>
 
-              <section className="border border-border bg-card p-4">
-                <div className="mb-4 flex flex-col gap-1">
+              <section className="min-w-0 overflow-hidden border border-border bg-card p-2.5 sm:p-4">
+                <div className="mb-3 flex flex-col gap-1 sm:mb-4">
                   <h2 className="text-base font-semibold">
                     {ticker} closing price
                   </h2>
@@ -230,72 +259,121 @@ export function TradeDetailPage() {
                 </div>
 
                 {yahooQuery?.isLoading ? (
-                  <div className="h-72 content-center text-sm text-muted-foreground">
+                  <div className="h-[18rem] content-center px-1 text-sm text-muted-foreground sm:h-80">
                     Loading chart...
                   </div>
                 ) : yahooQuery?.isError ? (
-                  <div className="h-72 content-center text-sm text-destructive">
+                  <div className="h-[18rem] content-center px-1 text-sm text-destructive sm:h-80">
                     {yahooQuery.error.message}
                   </div>
                 ) : (
-                  <ChartContainer
-                    config={{
-                      close: {
-                        label: "Close",
-                        color: "var(--chart-1)",
-                      },
-                    }}
-                    className="h-80"
-                  >
-                    <LineChart data={prices} margin={{ left: 8, right: 24 }}>
-                      <CartesianGrid vertical={false} />
-                      <XAxis
-                        dataKey="date"
-                        tickLine={false}
-                        axisLine={false}
-                        minTickGap={32}
-                      />
-                      <YAxis
-                        tickLine={false}
-                        axisLine={false}
-                        tickFormatter={(value) =>
-                          typeof value === "number"
-                            ? `$${value.toFixed(2)}`
-                            : String(value)
+                  <>
+                    <ChartContainer
+                      config={{
+                        close: {
+                          label: "Close",
+                          color: "var(--chart-1)",
+                        },
+                      }}
+                      className="h-[18rem] sm:h-80"
+                    >
+                      <LineChart
+                        data={prices}
+                        margin={
+                          isWideChart
+                            ? { left: 0, right: 10, top: 10, bottom: 2 }
+                            : { left: 0, right: 4, top: 8, bottom: 0 }
                         }
-                        domain={["dataMin - 5", "dataMax + 5"]}
-                      />
-                      <Tooltip content={<ChartTooltipContent />} />
-                      {tradePoint && tradeDate ? (
-                        <ReferenceLine
-                          x={tradePoint.date}
-                          stroke="var(--chart-2)"
-                          strokeDasharray="4 4"
-                          label={`Trade ${formatDate(tradeDate)}`}
+                      >
+                        <CartesianGrid vertical={false} />
+                        <XAxis
+                          dataKey="date"
+                          tickLine={false}
+                          axisLine={false}
+                          interval="preserveStartEnd"
+                          minTickGap={isWideChart ? 40 : 72}
+                          tick={{ fontSize: isWideChart ? 10 : 9 }}
+                          tickFormatter={formatChartDate}
+                        />
+                        <YAxis
+                          tickLine={false}
+                          axisLine={false}
+                          width={isWideChart ? 56 : 28}
+                          tick={{ fontSize: isWideChart ? 10 : 9 }}
+                          tickFormatter={(value) =>
+                            typeof value === "number"
+                              ? isWideChart
+                                ? `$${value.toFixed(2)}`
+                                : `${Math.round(value)}`
+                              : String(value)
+                          }
+                          domain={["dataMin - 5", "dataMax + 5"]}
+                        />
+                        <Tooltip
+                          cursor={{ strokeWidth: isWideChart ? 1 : 2 }}
+                          content={<ChartTooltipContent labelFormatter={formatDate} />}
+                        />
+                        {tradePoint && tradeDate ? (
+                          <ReferenceLine
+                            x={tradePoint.date}
+                            stroke="var(--chart-2)"
+                            strokeDasharray="4 4"
+                            label={
+                              isWideChart
+                                ? {
+                                    value: "Trade",
+                                    position: "insideTopLeft",
+                                    fill: "var(--foreground)",
+                                    fontSize: 10,
+                                  }
+                                : undefined
+                            }
+                          />
+                        ) : null}
+                        {publishedPoint && publishedDate ? (
+                          <ReferenceLine
+                            x={publishedPoint.date}
+                            stroke="var(--chart-4)"
+                            strokeDasharray="4 4"
+                            label={
+                              isWideChart
+                                ? {
+                                    value: "Published",
+                                    position: "insideTopRight",
+                                    fill: "var(--foreground)",
+                                    fontSize: 10,
+                                  }
+                                : undefined
+                            }
+                          />
+                        ) : null}
+                        <Line
+                          dataKey="close"
+                          type="monotone"
+                          stroke="var(--chart-1)"
+                          strokeWidth={isWideChart ? 2 : 2.5}
+                          dot={false}
+                          activeDot={{ r: isWideChart ? 4 : 5 }}
+                        />
+                      </LineChart>
+                    </ChartContainer>
+                    <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 px-1 text-[11px] text-muted-foreground sm:hidden">
+                      {tradePoint ? (
+                        <ChartMarker color="var(--chart-2)" label="Trade date" />
+                      ) : null}
+                      {publishedPoint ? (
+                        <ChartMarker
+                          color="var(--chart-4)"
+                          label="Published date"
                         />
                       ) : null}
-                      {publishedPoint && publishedDate ? (
-                        <ReferenceLine
-                          x={publishedPoint.date}
-                          stroke="var(--chart-4)"
-                          strokeDasharray="4 4"
-                          label={`Published ${formatDate(publishedDate)}`}
-                        />
-                      ) : null}
-                      <Line
-                        dataKey="close"
-                        type="monotone"
-                        stroke="var(--chart-1)"
-                        strokeWidth={2}
-                        dot={false}
-                      />
-                    </LineChart>
-                  </ChartContainer>
+                    </div>
+                  </>
                 )}
               </section>
             </>
           ) : (
-            <section className="border border-border bg-card p-4 text-sm text-muted-foreground">
+            <section className="border border-border bg-card p-3 text-sm text-muted-foreground sm:p-4">
               No ticker is available for this issuer, so price history and
               return calculations are not shown.
             </section>
@@ -314,10 +392,14 @@ function ReturnMetric({
   value: { dollars: string; percent: string };
 }) {
   return (
-    <div className="border border-border bg-card p-4">
+    <div className="min-w-0 border border-border bg-card p-3 sm:p-4">
       <div className="text-xs text-muted-foreground">{title}</div>
-      <div className="mt-2 text-lg font-semibold">{value.percent}</div>
-      <div className="text-xs text-muted-foreground">{value.dollars} / share</div>
+      <div className="mt-2 text-base font-semibold sm:text-lg">
+        {value.percent}
+      </div>
+      <div className="break-words text-[11px] text-muted-foreground sm:text-xs">
+        {value.dollars} / share
+      </div>
     </div>
   );
 }
@@ -330,9 +412,20 @@ function PriceMetric({
   value: number | undefined;
 }) {
   return (
-    <div className="border border-border bg-card p-4">
+    <div className="min-w-0 border border-border bg-card p-3 sm:p-4">
       <div className="text-xs text-muted-foreground">{title}</div>
-      <div className="mt-2 text-lg font-semibold">{formatMoney(value)}</div>
+      <div className="mt-2 break-words text-base font-semibold sm:text-lg">
+        {formatMoney(value)}
+      </div>
+    </div>
+  );
+}
+
+function ChartMarker({ color, label }: { color: string; label: string }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className="h-3 w-px" style={{ backgroundColor: color }} />
+      <span>{label}</span>
     </div>
   );
 }

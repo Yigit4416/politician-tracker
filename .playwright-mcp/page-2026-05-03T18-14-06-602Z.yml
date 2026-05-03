@@ -1,0 +1,83 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "Politician Tracker" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - img [ref=e7]
+          - generic [ref=e10]: Politician Tracker
+        - navigation [ref=e11]:
+          - link "Politicians" [ref=e12] [cursor=pointer]:
+            - /url: /politicians
+          - link "Trades" [ref=e13] [cursor=pointer]:
+            - /url: /all-trades
+          - button "Sign in" [ref=e14]:
+            - img
+            - generic [ref=e15]: Sign in
+          - button "Sign up" [ref=e16]:
+            - img
+            - generic [ref=e17]: Sign up
+    - main [ref=e18]:
+      - generic [ref=e20]:
+        - link "Trades" [ref=e21] [cursor=pointer]:
+          - /url: /all-trades
+          - img
+          - text: Trades
+        - heading "Trade Detail" [level=1] [ref=e22]
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - generic [ref=e26]: Politician
+            - generic [ref=e27]: Lloyd Smucker
+          - generic [ref=e28]:
+            - generic [ref=e29]: Issuer
+            - generic [ref=e30]: Wells Fargo & Co
+          - generic [ref=e31]:
+            - generic [ref=e32]: Trade Date
+            - generic [ref=e33]: Apr 23, 2026
+          - generic [ref=e34]:
+            - generic [ref=e35]: Published
+            - generic [ref=e36]: May 1, 2026
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - generic [ref=e39]: Bought close
+            - generic [ref=e40]: $80.51
+          - generic [ref=e41]:
+            - generic [ref=e42]: Published close
+            - generic [ref=e43]: $80.81
+          - generic [ref=e44]:
+            - generic [ref=e45]: Current close
+            - generic [ref=e46]: $80.81
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: Trade to today
+            - generic [ref=e50]: +0.37%
+            - generic [ref=e51]: +$0.30 / share
+          - generic [ref=e52]:
+            - generic [ref=e53]: Published to today
+            - generic [ref=e54]: +0.00%
+            - generic [ref=e55]: +$0.00 / share
+          - generic [ref=e56]:
+            - generic [ref=e57]: Trade to published
+            - generic [ref=e58]: +0.37%
+            - generic [ref=e59]: +$0.30 / share
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - heading "WFC closing price" [level=2] [ref=e62]
+            - paragraph [ref=e63]: Includes two weeks before the trade date. The trade and publish dates are marked on the chart.
+          - application [ref=e67]:
+            - generic [ref=e75]:
+              - generic [ref=e76]:
+                - generic [ref=e78]: Apr 9
+                - generic [ref=e80]: Apr 17
+                - generic [ref=e82]: May 1
+              - generic [ref=e83]:
+                - generic [ref=e85]: "74"
+                - generic [ref=e87]: "79"
+                - generic [ref=e89]: "84"
+                - generic [ref=e91]: "89"
+                - generic [ref=e93]: "92"
+          - generic [ref=e94]:
+            - generic [ref=e97]: Trade date
+            - generic [ref=e100]: Published date
+  - generic [ref=e101]: "74"

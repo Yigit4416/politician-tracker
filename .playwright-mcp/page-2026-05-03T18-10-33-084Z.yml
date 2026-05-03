@@ -1,0 +1,40 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Politician Tracker" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e10]: Politician Tracker
+      - navigation [ref=e11]:
+        - link "Politicians" [ref=e12] [cursor=pointer]:
+          - /url: /politicians
+        - link "Trades" [ref=e13] [cursor=pointer]:
+          - /url: /all-trades
+        - button "Sign in" [ref=e14]:
+          - img
+          - generic [ref=e15]: Sign in
+        - button "Sign up" [ref=e16]:
+          - img
+          - generic [ref=e17]: Sign up
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - link "Trades" [ref=e21] [cursor=pointer]:
+        - /url: /all-trades
+        - img
+        - text: Trades
+      - heading "Trade Detail" [level=1] [ref=e22]
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]: Politician
+          - generic [ref=e27]: David McCormick
+        - generic [ref=e28]:
+          - generic [ref=e29]: Issuer
+          - generic [ref=e30]: NORTHAMPTON BORO PENNSYLVANIA
+        - generic [ref=e31]:
+          - generic [ref=e32]: Trade Date
+          - generic [ref=e33]: Apr 24, 2026
+        - generic [ref=e34]:
+          - generic [ref=e35]: Published
+          - generic [ref=e36]: May 1, 2026
+      - generic [ref=e37]: No ticker is available for this issuer, so price history and return calculations are not shown.

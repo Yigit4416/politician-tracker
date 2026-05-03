@@ -43,12 +43,19 @@ function ChartContainer({
       <div
         data-chart={chartId}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-grid_line]:stroke-border [&_.recharts-tooltip-cursor]:stroke-border",
+          "block min-h-0 min-w-0 w-full overflow-hidden text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-grid_line]:stroke-border [&_.recharts-surface]:max-w-full [&_.recharts-tooltip-cursor]:stroke-border",
           className,
         )}
         {...props}
       >
-        <RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.ResponsiveContainer
+          width="100%"
+          height="100%"
+          minWidth={0}
+          minHeight={0}
+          initialDimension={{ width: 320, height: 288 }}
+          debounce={50}
+        >
           {children}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
@@ -65,6 +72,7 @@ type ChartTooltipContentProps = {
     color?: string;
   }>;
   label?: React.ReactNode;
+  labelFormatter?: (value: string) => React.ReactNode;
 };
 
 function formatTooltipValue(value: string | number | undefined) {
@@ -79,6 +87,7 @@ function ChartTooltipContent({
   active,
   payload,
   label,
+  labelFormatter,
 }: ChartTooltipContentProps) {
   const { config } = useChart();
 
@@ -88,7 +97,11 @@ function ChartTooltipContent({
 
   return (
     <div className="grid min-w-32 gap-1 border border-border bg-popover px-2 py-1.5 text-xs text-popover-foreground shadow-md">
-      <div className="font-medium">{label}</div>
+      <div className="font-medium">
+        {typeof label === "string" && labelFormatter
+          ? labelFormatter(label)
+          : label}
+      </div>
       {payload.map((item) => {
         const key = String(item.dataKey ?? item.name);
         const itemConfig = config[key];

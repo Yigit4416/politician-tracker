@@ -1,0 +1,23 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Politician Tracker" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e10]: Politician Tracker
+      - navigation [ref=e11]:
+        - link "Politicians" [ref=e12] [cursor=pointer]:
+          - /url: /politicians
+        - link "Trades" [ref=e13] [cursor=pointer]:
+          - /url: /all-trades
+        - button "Sign in" [ref=e14]:
+          - img
+          - generic [ref=e15]: Sign in
+        - button "Sign up" [ref=e16]:
+          - img
+          - generic [ref=e17]: Sign up
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - heading "Trades" [level=1] [ref=e20]
+      - paragraph [ref=e21]: Review the most recent tracked congressional trades.
+    - generic [ref=e22]: "{\"error\":\"Failed query: select \\\"trades\\\".\\\"tradeId\\\", \\\"trades\\\".\\\"traderId\\\", \\\"politicians\\\".\\\"firstName\\\", \\\"politicians\\\".\\\"lastName\\\", \\\"trades\\\".\\\"issuerId\\\", \\\"issuer\\\".\\\"issuerName\\\", \\\"trades\\\".\\\"publishingDate\\\", \\\"trades\\\".\\\"tradeDate\\\", \\\"trades\\\".\\\"reportingGap\\\", \\\"trades\\\".\\\"type\\\" from \\\"trades\\\" inner join \\\"politicians\\\" on \\\"politicians\\\".\\\"id\\\" = \\\"trades\\\".\\\"traderId\\\" inner join \\\"issuer\\\" on \\\"issuer\\\".\\\"issuerId\\\" = \\\"trades\\\".\\\"issuerId\\\" order by \\\"trades\\\".\\\"tradeDate\\\" desc\\nparams: \"}"

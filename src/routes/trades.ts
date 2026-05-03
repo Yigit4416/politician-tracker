@@ -9,6 +9,21 @@ function normalizeTicker(ticker: string | null) {
   return normalized ? normalized : null;
 }
 
+function errorMessage(error: unknown) {
+  if (!(error instanceof Error)) {
+    return String(error);
+  }
+
+  const cause =
+    error.cause instanceof Error
+      ? error.cause.message
+      : typeof error.cause === "string"
+        ? error.cause
+        : undefined;
+
+  return cause ? `${error.message}\nCause: ${cause}` : error.message;
+}
+
 async function getAllTrades() {
   return db
     .select({
@@ -65,10 +80,7 @@ export const tradesRoute = new Hono()
       const allTrades = await getAllTrades();
       return c.json(allTrades);
     } catch (error) {
-      return c.json(
-        { error: error instanceof Error ? error.message : String(error) },
-        500,
-      );
+      return c.json({ error: errorMessage(error) }, 500);
     }
   })
   .get("/all-trades", async (c) => {
@@ -76,10 +88,7 @@ export const tradesRoute = new Hono()
       const allTrades = await getAllTrades();
       return c.json(allTrades);
     } catch (error) {
-      return c.json(
-        { error: error instanceof Error ? error.message : String(error) },
-        500,
-      );
+      return c.json({ error: errorMessage(error) }, 500);
     }
   })
   .get("/:tradeId", async (c) => {
@@ -98,9 +107,6 @@ export const tradesRoute = new Hono()
 
       return c.json(trade);
     } catch (error) {
-      return c.json(
-        { error: error instanceof Error ? error.message : String(error) },
-        500,
-      );
+      return c.json({ error: errorMessage(error) }, 500);
     }
   });

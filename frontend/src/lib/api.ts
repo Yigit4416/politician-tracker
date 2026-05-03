@@ -6,11 +6,27 @@ const client = hc<ApiRoute>("/api");
 
 export const api = client;
 
+async function errorFromResponse(response: Response) {
+  const text = await response.text();
+
+  try {
+    const data = JSON.parse(text) as { error?: unknown };
+
+    if (typeof data.error === "string") {
+      return data.error;
+    }
+  } catch {
+    // Fall through to the raw response text.
+  }
+
+  return text || response.statusText;
+}
+
 async function getPoliticians() {
   const res = await api.politician.$get();
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    throw new Error(await errorFromResponse(res));
   }
 
   return res.json();
@@ -20,7 +36,7 @@ async function getTrades() {
   const res = await api.trades.$get();
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    throw new Error(await errorFromResponse(res));
   }
 
   return res.json();
@@ -34,7 +50,7 @@ async function getTrade(tradeId: string) {
   });
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    throw new Error(await errorFromResponse(res));
   }
 
   return res.json();
@@ -60,7 +76,7 @@ async function getYahooBetweenDates({
   });
 
   if (!res.ok) {
-    throw new Error(await res.text());
+    throw new Error(await errorFromResponse(res));
   }
 
   return res.json();

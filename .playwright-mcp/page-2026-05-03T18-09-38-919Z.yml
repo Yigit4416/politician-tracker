@@ -1,0 +1,230 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Politician Tracker" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e10]: Politician Tracker
+      - navigation [ref=e11]:
+        - link "Politicians" [ref=e12] [cursor=pointer]:
+          - /url: /politicians
+        - link "Trades" [active] [ref=e13] [cursor=pointer]:
+          - /url: /all-trades
+        - button "Sign in" [ref=e14]:
+          - img
+          - generic [ref=e15]: Sign in
+        - button "Sign up" [ref=e16]:
+          - img
+          - generic [ref=e17]: Sign up
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - heading "Trades" [level=1] [ref=e23]
+      - paragraph [ref=e24]: Review the most recent tracked congressional trades.
+    - generic [ref=e25]:
+      - textbox "Filter by politician..." [ref=e26]
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: Trade ID
+            - link "10000064900" [ref=e32] [cursor=pointer]:
+              - /url: /trades/10000064900
+          - generic [ref=e33]:
+            - generic [ref=e34]: Politician
+            - generic [ref=e36]: David McCormick
+          - generic [ref=e37]:
+            - generic [ref=e38]: Issuer
+            - generic [ref=e39]: NORTHAMPTON BORO PENNSYLVANIA
+          - generic [ref=e40]:
+            - generic [ref=e41]: Type
+            - generic [ref=e42]: buy
+          - generic [ref=e43]:
+            - generic [ref=e44]: Trade Date
+            - generic [ref=e45]: Apr 24, 2026
+          - generic [ref=e46]:
+            - generic [ref=e47]: Reporting Gap
+            - generic [ref=e48]: 7 days
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - generic [ref=e51]: Trade ID
+            - link "20003797509" [ref=e53] [cursor=pointer]:
+              - /url: /trades/20003797509
+          - generic [ref=e54]:
+            - generic [ref=e55]: Politician
+            - generic [ref=e57]: Lloyd Smucker
+          - generic [ref=e58]:
+            - generic [ref=e59]: Issuer
+            - generic [ref=e60]: Wells Fargo & Co
+          - generic [ref=e61]:
+            - generic [ref=e62]: Type
+            - generic [ref=e63]: sell
+          - generic [ref=e64]:
+            - generic [ref=e65]: Trade Date
+            - generic [ref=e66]: Apr 23, 2026
+          - generic [ref=e67]:
+            - generic [ref=e68]: Reporting Gap
+            - generic [ref=e69]: 7 days
+        - generic [ref=e70]:
+          - generic [ref=e71]:
+            - generic [ref=e72]: Trade ID
+            - link "20003797502" [ref=e74] [cursor=pointer]:
+              - /url: /trades/20003797502
+          - generic [ref=e75]:
+            - generic [ref=e76]: Politician
+            - generic [ref=e78]: Lloyd Smucker
+          - generic [ref=e79]:
+            - generic [ref=e80]: Issuer
+            - generic [ref=e81]: ENB FINANCIAL CORP
+          - generic [ref=e82]:
+            - generic [ref=e83]: Type
+            - generic [ref=e84]: sell
+          - generic [ref=e85]:
+            - generic [ref=e86]: Trade Date
+            - generic [ref=e87]: Apr 23, 2026
+          - generic [ref=e88]:
+            - generic [ref=e89]: Reporting Gap
+            - generic [ref=e90]: 7 days
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - generic [ref=e93]: Trade ID
+            - link "20003797508" [ref=e95] [cursor=pointer]:
+              - /url: /trades/20003797508
+          - generic [ref=e96]:
+            - generic [ref=e97]: Politician
+            - generic [ref=e99]: Lloyd Smucker
+          - generic [ref=e100]:
+            - generic [ref=e101]: Issuer
+            - generic [ref=e102]: Verizon Communications Inc
+          - generic [ref=e103]:
+            - generic [ref=e104]: Type
+            - generic [ref=e105]: sell
+          - generic [ref=e106]:
+            - generic [ref=e107]: Trade Date
+            - generic [ref=e108]: Apr 23, 2026
+          - generic [ref=e109]:
+            - generic [ref=e110]: Reporting Gap
+            - generic [ref=e111]: 7 days
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - generic [ref=e114]: Trade ID
+            - link "20003797506" [ref=e116] [cursor=pointer]:
+              - /url: /trades/20003797506
+          - generic [ref=e117]:
+            - generic [ref=e118]: Politician
+            - generic [ref=e120]: Lloyd Smucker
+          - generic [ref=e121]:
+            - generic [ref=e122]: Issuer
+            - generic [ref=e123]: Prudential Financial Inc
+          - generic [ref=e124]:
+            - generic [ref=e125]: Type
+            - generic [ref=e126]: sell
+          - generic [ref=e127]:
+            - generic [ref=e128]: Trade Date
+            - generic [ref=e129]: Apr 23, 2026
+          - generic [ref=e130]:
+            - generic [ref=e131]: Reporting Gap
+            - generic [ref=e132]: 7 days
+        - generic [ref=e133]:
+          - generic [ref=e134]:
+            - generic [ref=e135]: Trade ID
+            - link "20003797503" [ref=e137] [cursor=pointer]:
+              - /url: /trades/20003797503
+          - generic [ref=e138]:
+            - generic [ref=e139]: Politician
+            - generic [ref=e141]: Lloyd Smucker
+          - generic [ref=e142]:
+            - generic [ref=e143]: Issuer
+            - generic [ref=e144]: FULTON FINANCIAL CORP
+          - generic [ref=e145]:
+            - generic [ref=e146]: Type
+            - generic [ref=e147]: sell
+          - generic [ref=e148]:
+            - generic [ref=e149]: Trade Date
+            - generic [ref=e150]: Apr 23, 2026
+          - generic [ref=e151]:
+            - generic [ref=e152]: Reporting Gap
+            - generic [ref=e153]: 7 days
+        - generic [ref=e154]:
+          - generic [ref=e155]:
+            - generic [ref=e156]: Trade ID
+            - link "10000064901" [ref=e158] [cursor=pointer]:
+              - /url: /trades/10000064901
+          - generic [ref=e159]:
+            - generic [ref=e160]: Politician
+            - generic [ref=e162]: David McCormick
+          - generic [ref=e163]:
+            - generic [ref=e164]: Issuer
+            - generic [ref=e165]: GS FINANCE CORP
+          - generic [ref=e166]:
+            - generic [ref=e167]: Type
+            - generic [ref=e168]: buy
+          - generic [ref=e169]:
+            - generic [ref=e170]: Trade Date
+            - generic [ref=e171]: Apr 21, 2026
+          - generic [ref=e172]:
+            - generic [ref=e173]: Reporting Gap
+            - generic [ref=e174]: 10 days
+        - generic [ref=e175]:
+          - generic [ref=e176]:
+            - generic [ref=e177]: Trade ID
+            - link "20003797504" [ref=e179] [cursor=pointer]:
+              - /url: /trades/20003797504
+          - generic [ref=e180]:
+            - generic [ref=e181]: Politician
+            - generic [ref=e183]: Lloyd Smucker
+          - generic [ref=e184]:
+            - generic [ref=e185]: Issuer
+            - generic [ref=e186]: FULTON FINANCIAL CORP
+          - generic [ref=e187]:
+            - generic [ref=e188]: Type
+            - generic [ref=e189]: sell
+          - generic [ref=e190]:
+            - generic [ref=e191]: Trade Date
+            - generic [ref=e192]: Apr 17, 2026
+          - generic [ref=e193]:
+            - generic [ref=e194]: Reporting Gap
+            - generic [ref=e195]: 13 days
+        - generic [ref=e196]:
+          - generic [ref=e197]:
+            - generic [ref=e198]: Trade ID
+            - link "20003797505" [ref=e200] [cursor=pointer]:
+              - /url: /trades/20003797505
+          - generic [ref=e201]:
+            - generic [ref=e202]: Politician
+            - generic [ref=e204]: Lloyd Smucker
+          - generic [ref=e205]:
+            - generic [ref=e206]: Issuer
+            - generic [ref=e207]: FULTON FINANCIAL CORP
+          - generic [ref=e208]:
+            - generic [ref=e209]: Type
+            - generic [ref=e210]: sell
+          - generic [ref=e211]:
+            - generic [ref=e212]: Trade Date
+            - generic [ref=e213]: Apr 17, 2026
+          - generic [ref=e214]:
+            - generic [ref=e215]: Reporting Gap
+            - generic [ref=e216]: 13 days
+        - generic [ref=e217]:
+          - generic [ref=e218]:
+            - generic [ref=e219]: Trade ID
+            - link "20003797507" [ref=e221] [cursor=pointer]:
+              - /url: /trades/20003797507
+          - generic [ref=e222]:
+            - generic [ref=e223]: Politician
+            - generic [ref=e225]: Lloyd Smucker
+          - generic [ref=e226]:
+            - generic [ref=e227]: Issuer
+            - generic [ref=e228]: Truist Financial Corp
+          - generic [ref=e229]:
+            - generic [ref=e230]: Type
+            - generic [ref=e231]: sell
+          - generic [ref=e232]:
+            - generic [ref=e233]: Trade Date
+            - generic [ref=e234]: Apr 17, 2026
+          - generic [ref=e235]:
+            - generic [ref=e236]: Reporting Gap
+            - generic [ref=e237]: 13 days
+      - generic [ref=e238]:
+        - generic [ref=e239]: Page 1 of 12
+        - generic [ref=e240]:
+          - button "Previous" [disabled]
+          - button "Next" [ref=e241]

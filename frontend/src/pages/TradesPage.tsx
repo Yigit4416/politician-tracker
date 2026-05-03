@@ -114,9 +114,11 @@ export function TradesPage() {
   const trades = (query.data ?? []) as TradeRow[];
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="mb-6 flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold tracking-normal">Trades</h1>
+        <h1 className="text-xl font-semibold tracking-normal sm:text-2xl">
+          Trades
+        </h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
           Review the most recent tracked congressional trades.
         </p>
@@ -137,6 +139,14 @@ export function TradesPage() {
           emptyMessage="No trades found."
           filterColumn="politicianName"
           filterPlaceholder="Filter by politician..."
+          mobileLabels={{
+            tradeId: "Trade ID",
+            politicianName: "Politician",
+            issuerName: "Issuer",
+            type: "Type",
+            tradeDate: "Trade Date",
+            reportingGap: "Reporting Gap",
+          }}
         />
       )}
     </main>

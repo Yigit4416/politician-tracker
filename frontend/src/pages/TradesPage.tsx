@@ -1,4 +1,5 @@
 import { CaretUpDown } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useQuery } from "@tanstack/react-query";
 
@@ -32,7 +33,14 @@ const columns: ColumnDef<TradeRow>[] = [
     accessorKey: "tradeId",
     header: "Trade ID",
     cell: ({ row }) => (
-      <span className="font-mono">{row.original.tradeId}</span>
+      <Button asChild variant="link" size="sm" className="font-mono">
+        <Link
+          to="/trades/$tradeId"
+          params={() => ({ tradeId: String(row.original.tradeId) })}
+        >
+          {row.original.tradeId}
+        </Link>
+      </Button>
     ),
   },
   {

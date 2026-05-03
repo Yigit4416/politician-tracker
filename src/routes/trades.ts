@@ -3,6 +3,12 @@ import { db } from "../db";
 import { issuerTable, politiciansTable, tradesTable } from "../db/schema";
 import { desc, eq } from "drizzle-orm";
 
+function normalizeTicker(ticker: string | null) {
+  const normalized = ticker?.trim().split(":")[0]?.trim().toUpperCase();
+
+  return normalized ? normalized : null;
+}
+
 async function getAllTrades() {
   return db
     .select({
@@ -23,24 +29,78 @@ async function getAllTrades() {
     .orderBy(desc(tradesTable.tradeDate));
 }
 
-export const tradesRoute = new Hono().get("/", async (c) => {
-  try {
-    const allTrades = await getAllTrades();
-    return c.json(allTrades);
-  } catch (error) {
-    return c.json(
-      { error: error instanceof Error ? error.message : String(error) },
-      500,
-    );
+async function getTradeById(tradeId: number) {
+  const [trade] = await db
+    .select({
+      tradeId: tradesTable.tradeId,
+      traderId: tradesTable.traderId,
+      politicianFirstName: politiciansTable.firstName,
+      politicianLastName: politiciansTable.lastName,
+      issuerId: tradesTable.issuerId,
+      issuerName: issuerTable.issuerName,
+      ticker: issuerTable.ticker,
+      publishingDate: tradesTable.publishingDate,
+      tradeDate: tradesTable.tradeDate,
+      reportingGap: tradesTable.reportingGap,
+      type: tradesTable.type,
+    })
+    .from(tradesTable)
+    .innerJoin(politiciansTable, eq(politiciansTable.id, tradesTable.traderId))
+    .innerJoin(issuerTable, eq(issuerTable.issuerId, tradesTable.issuerId))
+    .where(eq(tradesTable.tradeId, tradeId));
+
+  if (!trade) {
+    return undefined;
   }
-}).get("/all-trades", async (c) => {
-  try {
-    const allTrades = await getAllTrades();
-    return c.json(allTrades);
-  } catch (error) {
-    return c.json(
-      { error: error instanceof Error ? error.message : String(error) },
-      500,
-    );
-  }
-});
+
+  return {
+    ...trade,
+    ticker: normalizeTicker(trade.ticker),
+  };
+}
+
+export const tradesRoute = new Hono()
+  .get("/", async (c) => {
+    try {
+      const allTrades = await getAllTrades();
+      return c.json(allTrades);
+    } catch (error) {
+      return c.json(
+        { error: error instanceof Error ? error.message : String(error) },
+        500,
+      );
+    }
+  })
+  .get("/all-trades", async (c) => {
+    try {
+      const allTrades = await getAllTrades();
+      return c.json(allTrades);
+    } catch (error) {
+      return c.json(
+        { error: error instanceof Error ? error.message : String(error) },
+        500,
+      );
+    }
+  })
+  .get("/:tradeId", async (c) => {
+    const tradeId = Number(c.req.param("tradeId"));
+
+    if (!Number.isInteger(tradeId) || tradeId <= 0) {
+      return c.json({ error: "tradeId must be a positive integer" }, 400);
+    }
+
+    try {
+      const trade = await getTradeById(tradeId);
+
+      if (!trade) {
+        return c.json({ error: "Trade not found" }, 404);
+      }
+
+      return c.json(trade);
+    } catch (error) {
+      return c.json(
+        { error: error instanceof Error ? error.message : String(error) },
+        500,
+      );
+    }
+  });

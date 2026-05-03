@@ -23,7 +23,7 @@ WORKDIR /app
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
 
-FROM oven/bun:1 AS runtime
+FROM oven/bun:1 AS production
 
 WORKDIR /app
 

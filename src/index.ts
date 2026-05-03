@@ -21,6 +21,8 @@ export type ApiRoute = typeof apiRoutes; // To use in frontend without problem
 
 app.route("/api", apiRoutes);
 
+app.get("/health", (c) => c.json({ ok: true }));
+
 app.get("*", serveStatic({ root: "frontend/dist" }));
 app.get("*", serveStatic({ path: "frontend/dist/index.html" }));
 

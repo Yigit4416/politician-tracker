@@ -8,6 +8,7 @@ import { logger } from "hono/logger";
 import { politicianRoute } from "./routes/politician";
 import { tradesRoute } from "./routes/trades";
 import { serveStatic } from "hono/bun";
+import yahooRouter from "./routes/yahoo";
 
 const app = new Hono();
 
@@ -15,7 +16,8 @@ app.use("*", logger());
 
 const apiRoutes = new Hono()
   .route("/politician", politicianRoute)
-  .route("/trades", tradesRoute);
+  .route("/trades", tradesRoute)
+  .route("/yahoo", yahooRouter);
 
 export type ApiRoute = typeof apiRoutes; // To use in frontend without problem
 

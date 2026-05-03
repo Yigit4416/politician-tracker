@@ -9,8 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TradesRouteImport } from './routes/trades'
+import { Route as PoliticiansRouteImport } from './routes/politicians'
+import { Route as AllTradesRouteImport } from './routes/all-trades'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TradesRoute = TradesRouteImport.update({
+  id: '/trades',
+  path: '/trades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticiansRoute = PoliticiansRouteImport.update({
+  id: '/politicians',
+  path: '/politicians',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AllTradesRoute = AllTradesRouteImport.update({
+  id: '/all-trades',
+  path: '/all-trades',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +37,61 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/all-trades': typeof AllTradesRoute
+  '/politicians': typeof PoliticiansRoute
+  '/trades': typeof TradesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/all-trades': typeof AllTradesRoute
+  '/politicians': typeof PoliticiansRoute
+  '/trades': typeof TradesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/all-trades': typeof AllTradesRoute
+  '/politicians': typeof PoliticiansRoute
+  '/trades': typeof TradesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/all-trades' | '/politicians' | '/trades'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/all-trades' | '/politicians' | '/trades'
+  id: '__root__' | '/' | '/all-trades' | '/politicians' | '/trades'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AllTradesRoute: typeof AllTradesRoute
+  PoliticiansRoute: typeof PoliticiansRoute
+  TradesRoute: typeof TradesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trades': {
+      id: '/trades'
+      path: '/trades'
+      fullPath: '/trades'
+      preLoaderRoute: typeof TradesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politicians': {
+      id: '/politicians'
+      path: '/politicians'
+      fullPath: '/politicians'
+      preLoaderRoute: typeof PoliticiansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/all-trades': {
+      id: '/all-trades'
+      path: '/all-trades'
+      fullPath: '/all-trades'
+      preLoaderRoute: typeof AllTradesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +104,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AllTradesRoute: AllTradesRoute,
+  PoliticiansRoute: PoliticiansRoute,
+  TradesRoute: TradesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,6 +1,6 @@
 import { fetchPoliticianTrades } from "./scraper";
 
-const DEFAULT_INTERVAL_MINUTES = 60;
+const DEFAULT_INTERVAL_MINUTES = 24 * 60;
 
 function readPositiveNumber(value: string | undefined, fallback: number) {
   const parsed = Number(value);

@@ -1,16 +1,30 @@
 import { Hono } from "hono";
 import { sql } from "drizzle-orm";
 import { db } from "./db";
-import {
-  issuerTable,
-  politiciansTable,
-  tradesTable,
-} from "./db/schema";
+import { issuerTable, politiciansTable, tradesTable } from "./db/schema";
 import { fetchPoliticianTrades } from "./scraper";
 import type { FetchPoliticianTradesResult } from "./scraper";
+import { logger } from "hono/logger";
+import { politicianRoute } from "./routes/politician";
+import { tradesRoute } from "./routes/trades";
+import { serveStatic } from "hono/bun";
 
 const app = new Hono();
-const DEFAULT_SCRAPE_INTERVAL_MINUTES = 60;
+
+app.use("*", logger());
+
+const apiRoutes = new Hono()
+  .route("/politician", politicianRoute)
+  .route("/trades", tradesRoute);
+
+export type ApiRoute = typeof apiRoutes; // To use in frontend without problem
+
+app.route("/api", apiRoutes);
+
+app.get("*", serveStatic({ root: "frontend/dist" }));
+app.get("*", serveStatic({ path: "frontend/dist/index.html" }));
+
+const DEFAULT_SCRAPE_INTERVAL_MINUTES = 24 * 60;
 
 function readPositiveNumber(value: string | undefined, fallback: number) {
   const parsed = Number(value);
@@ -23,10 +37,7 @@ function excluded(column: { name: string }) {
 }
 
 async function insertPoliticianTrades(result: FetchPoliticianTradesResult) {
-  const politicians = new Map<
-    string,
-    typeof politiciansTable.$inferInsert
-  >();
+  const politicians = new Map<string, typeof politiciansTable.$inferInsert>();
   const issuers = new Map<string, typeof issuerTable.$inferInsert>();
   const trades = new Map<number, typeof tradesTable.$inferInsert>();
 

@@ -1,22 +1,15 @@
-import './App.css'
-import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/react'
-import { Outlet } from '@tanstack/react-router'
+import "./App.css";
+import { Outlet } from "@tanstack/react-router";
+
+import { TopBar } from "@/components/TopBar";
 
 function App() {
   return (
-    <>
-      <header>
-        <Show when="signed-out">
-          <SignInButton />
-          <SignUpButton />
-        </Show>
-        <Show when="signed-in">
-          <UserButton />
-        </Show>
-      </header>
+    <div className="min-h-screen bg-background text-foreground">
+      <TopBar />
       <Outlet />
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

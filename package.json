@@ -3,7 +3,8 @@
   "scripts": {
     "cron": "bun run src/cron.ts",
     "dev": "bun run --hot src/index.ts",
-    "scrape": "bun run src/scraper.ts"
+    "scrape": "bun run src/scraper.ts",
+    "start": "bun run src/index.ts"
   },
   "dependencies": {
     "dotenv": "^17.4.2",

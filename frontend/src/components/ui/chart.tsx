@@ -72,7 +72,7 @@ type ChartTooltipContentProps = {
     color?: string;
   }>;
   label?: React.ReactNode;
-  labelFormatter?: (value: string) => React.ReactNode;
+  labelFormatter?: (value: string | number) => React.ReactNode;
 };
 
 function formatTooltipValue(value: string | number | undefined) {
@@ -98,7 +98,7 @@ function ChartTooltipContent({
   return (
     <div className="grid min-w-32 gap-1 border border-border bg-popover px-2 py-1.5 text-xs text-popover-foreground shadow-md">
       <div className="font-medium">
-        {typeof label === "string" && labelFormatter
+        {(typeof label === "string" || typeof label === "number") && labelFormatter
           ? labelFormatter(label)
           : label}
       </div>

@@ -41,7 +41,7 @@ async function getAllTrades() {
     .from(tradesTable)
     .innerJoin(politiciansTable, eq(politiciansTable.id, tradesTable.traderId))
     .innerJoin(issuerTable, eq(issuerTable.issuerId, tradesTable.issuerId))
-    .orderBy(desc(tradesTable.tradeDate));
+    .orderBy(desc(tradesTable.publishingDate));
 }
 
 async function getTradeById(tradeId: number) {

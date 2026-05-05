@@ -27,6 +27,7 @@ type DataTableProps<TData, TValue> = {
   emptyMessage: string;
   filterColumn?: string;
   filterPlaceholder?: string;
+  initialSorting?: SortingState;
   mobileLabels?: Record<string, string>;
 };
 
@@ -36,9 +37,10 @@ export function DataTable<TData, TValue>({
   emptyMessage,
   filterColumn,
   filterPlaceholder = "Filter...",
+  initialSorting = [],
   mobileLabels = {},
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>(initialSorting);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({

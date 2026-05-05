@@ -1,4 +1,5 @@
 import { CaretUpDown } from "@phosphor-icons/react";
+import { Link } from "@tanstack/react-router";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useQuery } from "@tanstack/react-query";
 
@@ -43,9 +44,11 @@ const columns: ColumnDef<PoliticianRow>[] = [
       </Button>
     ),
     cell: ({ row }) => (
-      <span className="font-medium">
-        {row.original.firstName} {row.original.lastName}
-      </span>
+      <Button asChild variant="link" size="sm" className="font-medium">
+        <Link to="/all-trades" search={{ politician: row.original.id }}>
+          {row.original.firstName} {row.original.lastName}
+        </Link>
+      </Button>
     ),
   },
   {

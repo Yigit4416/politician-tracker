@@ -50,6 +50,7 @@ const columns: ColumnDef<TradeRow>[] = [
       <Button
         variant="ghost"
         size="sm"
+        className="-ml-2.5 justify-start"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Politician
@@ -57,9 +58,14 @@ const columns: ColumnDef<TradeRow>[] = [
       </Button>
     ),
     cell: ({ row }) => (
-      <span className="font-medium">
-        {row.original.politicianFirstName} {row.original.politicianLastName}
-      </span>
+      <Button asChild variant="link" size="sm" className="font-medium">
+        <Link
+          to="/all-trades"
+          search={{ politician: row.original.traderId }}
+        >
+          {row.original.politicianFirstName} {row.original.politicianLastName}
+        </Link>
+      </Button>
     ),
   },
   {
@@ -68,6 +74,7 @@ const columns: ColumnDef<TradeRow>[] = [
       <Button
         variant="ghost"
         size="sm"
+        className="-ml-2.5 justify-start"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Issuer
@@ -78,20 +85,41 @@ const columns: ColumnDef<TradeRow>[] = [
   {
     accessorKey: "type",
     header: "Type",
+    cell: ({ row }) => {
+      const normalizedType = row.original.type.toLowerCase();
+      const isBuy = normalizedType.includes("buy");
+      const isSell = normalizedType.includes("sell");
+
+      return (
+        <span
+          className={[
+            "inline-flex h-7 items-center border px-2 text-xs font-medium",
+            isBuy
+              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+              : isSell
+                ? "border-red-500/30 bg-red-500/10 text-red-700 dark:text-red-300"
+                : "border-border bg-muted text-muted-foreground",
+          ].join(" ")}
+        >
+          {row.original.type}
+        </span>
+      );
+    },
   },
   {
-    accessorKey: "tradeDate",
+    id: "publishingDate",
+    accessorFn: (row) => new Date(row.publishingDate).getTime(),
     header: ({ column }) => (
       <Button
         variant="ghost"
         size="sm"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Trade Date
+        Publishing Date
         <CaretUpDown />
       </Button>
     ),
-    cell: ({ row }) => formatDate(row.original.tradeDate),
+    cell: ({ row }) => formatDate(row.original.publishingDate),
   },
   {
     accessorKey: "reportingGap",
@@ -109,19 +137,36 @@ const columns: ColumnDef<TradeRow>[] = [
   },
 ];
 
-export function TradesPage() {
+type TradesPageProps = {
+  politicianId?: string;
+};
+
+export function TradesPage({ politicianId }: TradesPageProps = {}) {
   const query = useQuery(tradesQueryOptions);
-  const trades = (query.data ?? []) as TradeRow[];
+  const allTrades = (query.data ?? []) as TradeRow[];
+  const trades = politicianId
+    ? allTrades.filter((trade) => trade.traderId === politicianId)
+    : allTrades;
+  const selectedPolitician = trades[0]
+    ? `${trades[0].politicianFirstName} ${trades[0].politicianLastName}`
+    : undefined;
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
+    <main className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="mb-6 flex flex-col gap-2">
         <h1 className="text-xl font-semibold tracking-normal sm:text-2xl">
           Trades
         </h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Review the most recent tracked congressional trades.
+          {selectedPolitician
+            ? `Review all tracked trades for ${selectedPolitician}.`
+            : "Review the most recent tracked congressional trades."}
         </p>
+        {politicianId ? (
+          <Button asChild variant="outline" size="sm" className="w-fit">
+            <Link to="/all-trades">Show all trades</Link>
+          </Button>
+        ) : null}
       </div>
 
       {query.isLoading ? (
@@ -139,12 +184,13 @@ export function TradesPage() {
           emptyMessage="No trades found."
           filterColumn="politicianName"
           filterPlaceholder="Filter by politician..."
+          initialSorting={[{ id: "publishingDate", desc: true }]}
           mobileLabels={{
             tradeId: "Trade ID",
             politicianName: "Politician",
             issuerName: "Issuer",
             type: "Type",
-            tradeDate: "Trade Date",
+            publishingDate: "Publishing Date",
             reportingGap: "Reporting Gap",
           }}
         />

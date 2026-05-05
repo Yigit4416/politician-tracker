@@ -1,11 +1,18 @@
 import { ArrowLeft } from "@phosphor-icons/react";
 import { Link, useParams } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useCallback, useSyncExternalStore } from "react";
+import {
+  type PointerEvent,
+  useCallback,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   CartesianGrid,
   Line,
   LineChart,
+  ReferenceArea,
   ReferenceLine,
   XAxis,
   YAxis,
@@ -24,10 +31,16 @@ import {
 
 type PricePoint = {
   date: string;
+  time: number;
   close: number;
 };
 
-function toDateOnly(value: string | Date) {
+type ChartSelection = {
+  startTime: number;
+  endTime: number;
+};
+
+function toDateOnly(value: string | Date | number) {
   return new Date(value).toISOString().slice(0, 10);
 }
 
@@ -37,7 +50,7 @@ function addDays(date: string, days: number) {
   return toDateOnly(nextDate);
 }
 
-function formatDate(value: string | Date) {
+function formatDate(value: string | Date | number) {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "short",
@@ -45,7 +58,7 @@ function formatDate(value: string | Date) {
   }).format(new Date(value));
 }
 
-function formatChartDate(value: string | Date) {
+function formatChartDate(value: string | Date | number) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
@@ -79,16 +92,34 @@ function formatReturn(start: number | undefined, end: number | undefined) {
   };
 }
 
-function getPriceAtOrAfter(points: PricePoint[], date: string) {
-  return points.find((point) => point.date >= date)?.close;
+function dateOnlyToTime(date: string) {
+  return new Date(`${date}T00:00:00Z`).getTime();
 }
 
-function getPointAtOrAfter(points: PricePoint[], date: string) {
-  return points.find((point) => point.date >= date);
+function getPriceAtOrAfter(points: PricePoint[], date: string) {
+  const time = dateOnlyToTime(date);
+
+  return points.find((point) => point.time >= time)?.close;
 }
 
 function getLatestPrice(points: PricePoint[]) {
   return points.at(-1)?.close;
+}
+
+function getClosestPricePoint(points: PricePoint[], time: number | undefined) {
+  if (time === undefined) {
+    return undefined;
+  }
+
+  return points.reduce<PricePoint | undefined>((closest, point) => {
+    if (!closest) {
+      return point;
+    }
+
+    return Math.abs(point.time - time) < Math.abs(closest.time - time)
+      ? point
+      : closest;
+  }, undefined);
 }
 
 function useMediaQuery(query: string) {
@@ -137,7 +168,8 @@ function toPricePoints(data: Awaited<ReturnType<typeof fetch>> | unknown) {
 
     return [
       {
-        date: toDateOnly(new Date(timestamp * 1000)),
+        date: toDateOnly(timestamp * 1000),
+        time: timestamp * 1000,
         close,
       },
     ];
@@ -146,6 +178,10 @@ function toPricePoints(data: Awaited<ReturnType<typeof fetch>> | unknown) {
 
 export function TradeDetailPage() {
   const isWideChart = useMediaQuery("(min-width: 640px)");
+  const chartWrapperRef = useRef<HTMLDivElement>(null);
+  const [selectionStartTime, setSelectionStartTime] = useState<number>();
+  const [selectionActiveTime, setSelectionActiveTime] = useState<number>();
+  const [chartSelection, setChartSelection] = useState<ChartSelection>();
   const { tradeId } = useParams({ from: "/trades/$tradeId" });
   const tradeQuery = useQuery(tradeQueryOptions(tradeId));
   const trade = tradeQuery.data;
@@ -153,33 +189,123 @@ export function TradeDetailPage() {
   const tradeDate = trade ? toDateOnly(trade.tradeDate) : undefined;
   const publishedDate = trade ? toDateOnly(trade.publishingDate) : undefined;
   const today = toDateOnly(new Date());
+  const yahooEnd = addDays(today, 1);
   const yahooBegin = tradeDate ? addDays(tradeDate, -14) : undefined;
 
   const yahooQuery = useQuery({
     ...yahooBetweenDatesQueryOptions({
       ticker: ticker ?? "",
       begin: yahooBegin ?? "1970-01-01",
-      end: today,
+      end: yahooEnd,
     }),
     enabled: Boolean(ticker && tradeDate && yahooBegin),
   });
 
   const prices = yahooQuery?.data ? toPricePoints(yahooQuery.data) : [];
-  const tradePoint = tradeDate ? getPointAtOrAfter(prices, tradeDate) : undefined;
-  const publishedPoint = publishedDate
-    ? getPointAtOrAfter(prices, publishedDate)
-    : undefined;
   const tradeClose = tradeDate ? getPriceAtOrAfter(prices, tradeDate) : undefined;
   const publishedClose = publishedDate
     ? getPriceAtOrAfter(prices, publishedDate)
     : undefined;
   const latestClose = getLatestPrice(prices);
+  const chartMinTime = Math.min(
+    ...prices.map((point) => point.time),
+    ...(tradeDate ? [dateOnlyToTime(tradeDate)] : []),
+    ...(publishedDate ? [dateOnlyToTime(publishedDate)] : []),
+  );
+  const chartMaxTime = Math.max(
+    ...prices.map((point) => point.time),
+    ...(tradeDate ? [dateOnlyToTime(tradeDate)] : []),
+    ...(publishedDate ? [dateOnlyToTime(publishedDate)] : []),
+  );
   const tradeToToday = formatReturn(tradeClose, latestClose);
   const publishedToToday = formatReturn(publishedClose, latestClose);
   const tradeToPublished = formatReturn(tradeClose, publishedClose);
+  const selectionPreview =
+    selectionStartTime !== undefined && selectionActiveTime !== undefined
+      ? {
+          startTime: selectionStartTime,
+          endTime: selectionActiveTime,
+        }
+      : chartSelection;
+  const selectedStartTime =
+    selectionPreview &&
+    Math.min(selectionPreview.startTime, selectionPreview.endTime);
+  const selectedEndTime =
+    selectionPreview &&
+    Math.max(selectionPreview.startTime, selectionPreview.endTime);
+  const selectedStartPoint = getClosestPricePoint(prices, selectedStartTime);
+  const selectedEndPoint = getClosestPricePoint(prices, selectedEndTime);
+  const selectedReturn = formatReturn(
+    selectedStartPoint?.close,
+    selectedEndPoint?.close,
+  );
+  const selectedIsPositive =
+    selectedStartPoint && selectedEndPoint
+      ? selectedEndPoint.close >= selectedStartPoint.close
+      : undefined;
+
+  function getTimeFromPointer(clientX: number) {
+    const chartWrapper = chartWrapperRef.current;
+
+    if (!chartWrapper || !Number.isFinite(chartMinTime) || !Number.isFinite(chartMaxTime)) {
+      return undefined;
+    }
+
+    const rect = chartWrapper.getBoundingClientRect();
+    const yAxisWidth = isWideChart ? 56 : 28;
+    const rightMargin = isWideChart ? 10 : 4;
+    const left = rect.left + yAxisWidth;
+    const width = rect.width - yAxisWidth - rightMargin;
+    const ratio = Math.min(Math.max((clientX - left) / width, 0), 1);
+
+    return chartMinTime + (chartMaxTime - chartMinTime) * ratio;
+  }
+
+  function handleChartPointerDown(event: PointerEvent<HTMLDivElement>) {
+    const time = getTimeFromPointer(event.clientX);
+
+    if (time === undefined) {
+      return;
+    }
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setSelectionStartTime(time);
+    setSelectionActiveTime(time);
+  }
+
+  function handleChartPointerMove(event: PointerEvent<HTMLDivElement>) {
+    if (selectionStartTime === undefined) {
+      return;
+    }
+
+    const time = getTimeFromPointer(event.clientX);
+
+    if (time !== undefined) {
+      setSelectionActiveTime(time);
+    }
+  }
+
+  function handleChartPointerUp(event: PointerEvent<HTMLDivElement>) {
+    if (selectionStartTime === undefined) {
+      return;
+    }
+
+    const endTime = getTimeFromPointer(event.clientX) ?? selectionActiveTime;
+
+    if (
+      endTime !== undefined &&
+      getClosestPricePoint(prices, selectionStartTime)?.time !==
+        getClosestPricePoint(prices, endTime)?.time
+    ) {
+      setChartSelection({ startTime: selectionStartTime, endTime });
+    }
+
+    setSelectionStartTime(undefined);
+    setSelectionActiveTime(undefined);
+  }
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
+    <main className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-6 sm:py-8">
       <div className="mb-5 flex items-center justify-between gap-4 sm:mb-6">
         <div className="flex flex-col gap-2">
           <Button asChild variant="ghost" size="sm" className="w-fit">
@@ -220,7 +346,7 @@ export function TradeDetailPage() {
               <div className="font-medium">{formatDate(trade.tradeDate)}</div>
             </div>
             <div>
-              <div className="text-muted-foreground">Published</div>
+              <div className="text-muted-foreground">Publishing Date</div>
               <div className="font-medium">
                 {formatDate(trade.publishingDate)}
               </div>
@@ -256,6 +382,39 @@ export function TradeDetailPage() {
                     Includes two weeks before the trade date. The trade and
                     publish dates are marked on the chart.
                   </p>
+                  {selectedStartPoint && selectedEndPoint ? (
+                    <div className="mt-2 flex flex-col gap-2 border border-border bg-background p-2 text-xs sm:flex-row sm:items-center sm:justify-between">
+                      <div className="min-w-0">
+                        <div className="text-muted-foreground">
+                          Selected range
+                        </div>
+                        <div className="font-medium">
+                          {formatDate(selectedStartPoint.time)} to{" "}
+                          {formatDate(selectedEndPoint.time)}
+                        </div>
+                      </div>
+                      <div
+                        className={[
+                          "font-mono text-sm font-semibold",
+                          selectedIsPositive
+                            ? "text-emerald-700 dark:text-emerald-300"
+                            : "text-red-700 dark:text-red-300",
+                        ].join(" ")}
+                      >
+                        {selectedReturn.percent} ({selectedReturn.dollars})
+                      </div>
+                      {chartSelection ? (
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          className="w-fit"
+                          onClick={() => setChartSelection(undefined)}
+                        >
+                          Clear
+                        </Button>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
 
                 {yahooQuery?.isLoading ? (
@@ -268,100 +427,131 @@ export function TradeDetailPage() {
                   </div>
                 ) : (
                   <>
-                    <ChartContainer
-                      config={{
-                        close: {
-                          label: "Close",
-                          color: "var(--chart-1)",
-                        },
+                    <div
+                      ref={chartWrapperRef}
+                      className="touch-none select-none"
+                      onPointerDown={handleChartPointerDown}
+                      onPointerMove={handleChartPointerMove}
+                      onPointerUp={handleChartPointerUp}
+                      onPointerCancel={() => {
+                        setSelectionStartTime(undefined);
+                        setSelectionActiveTime(undefined);
                       }}
-                      className="h-[18rem] sm:h-80"
                     >
-                      <LineChart
-                        data={prices}
-                        margin={
-                          isWideChart
-                            ? { left: 0, right: 10, top: 10, bottom: 2 }
-                            : { left: 0, right: 4, top: 8, bottom: 0 }
-                        }
+                      <ChartContainer
+                        config={{
+                          close: {
+                            label: "Close",
+                            color: "var(--chart-1)",
+                          },
+                        }}
+                        className="h-[18rem] sm:h-80"
                       >
-                        <CartesianGrid vertical={false} />
-                        <XAxis
-                          dataKey="date"
-                          tickLine={false}
-                          axisLine={false}
-                          interval="preserveStartEnd"
-                          minTickGap={isWideChart ? 40 : 72}
-                          tick={{ fontSize: isWideChart ? 10 : 9 }}
-                          tickFormatter={formatChartDate}
-                        />
-                        <YAxis
-                          tickLine={false}
-                          axisLine={false}
-                          width={isWideChart ? 56 : 28}
-                          tick={{ fontSize: isWideChart ? 10 : 9 }}
-                          tickFormatter={(value) =>
-                            typeof value === "number"
-                              ? isWideChart
-                                ? `$${value.toFixed(2)}`
-                                : `${Math.round(value)}`
-                              : String(value)
+                        <LineChart
+                          data={prices}
+                          margin={
+                            isWideChart
+                              ? { left: 0, right: 10, top: 10, bottom: 2 }
+                              : { left: 0, right: 4, top: 8, bottom: 0 }
                           }
-                          domain={["dataMin - 5", "dataMax + 5"]}
-                        />
-                        <Tooltip
-                          cursor={{ strokeWidth: isWideChart ? 1 : 2 }}
-                          content={<ChartTooltipContent labelFormatter={formatDate} />}
-                        />
-                        {tradePoint && tradeDate ? (
-                          <ReferenceLine
-                            x={tradePoint.date}
-                            stroke="var(--chart-2)"
-                            strokeDasharray="4 4"
-                            label={
-                              isWideChart
-                                ? {
-                                    value: "Trade",
-                                    position: "insideTopLeft",
-                                    fill: "var(--foreground)",
-                                    fontSize: 10,
-                                  }
-                                : undefined
+                        >
+                          <CartesianGrid vertical={false} />
+                          <XAxis
+                            dataKey="time"
+                            type="number"
+                            domain={[chartMinTime, chartMaxTime]}
+                            tickLine={false}
+                            axisLine={false}
+                            interval="preserveStartEnd"
+                            minTickGap={isWideChart ? 40 : 72}
+                            tick={{ fontSize: isWideChart ? 10 : 9 }}
+                            tickFormatter={formatChartDate}
+                          />
+                          <YAxis
+                            tickLine={false}
+                            axisLine={false}
+                            width={isWideChart ? 56 : 28}
+                            tick={{ fontSize: isWideChart ? 10 : 9 }}
+                            tickFormatter={(value) =>
+                              typeof value === "number"
+                                ? isWideChart
+                                  ? `$${value.toFixed(2)}`
+                                  : `${Math.round(value)}`
+                                : String(value)
+                            }
+                            domain={["dataMin - 5", "dataMax + 5"]}
+                          />
+                          <Tooltip
+                            cursor={{ strokeWidth: isWideChart ? 1 : 2 }}
+                            content={
+                              <ChartTooltipContent labelFormatter={formatDate} />
                             }
                           />
-                        ) : null}
-                        {publishedPoint && publishedDate ? (
-                          <ReferenceLine
-                            x={publishedPoint.date}
-                            stroke="var(--chart-4)"
-                            strokeDasharray="4 4"
-                            label={
-                              isWideChart
-                                ? {
-                                    value: "Published",
-                                    position: "insideTopRight",
-                                    fill: "var(--foreground)",
-                                    fontSize: 10,
-                                  }
-                                : undefined
-                            }
+                          {selectedStartTime !== undefined &&
+                          selectedEndTime !== undefined ? (
+                            <ReferenceArea
+                              x1={selectedStartTime}
+                              x2={selectedEndTime}
+                              stroke="var(--chart-1)"
+                              fill="var(--chart-1)"
+                              fillOpacity={0.12}
+                              className="pointer-events-none"
+                            />
+                          ) : null}
+                          {tradeDate ? (
+                            <ReferenceLine
+                              x={dateOnlyToTime(tradeDate)}
+                              stroke="var(--chart-2)"
+                              strokeDasharray="4 4"
+                              className="pointer-events-none"
+                              label={
+                                isWideChart
+                                  ? {
+                                      value: "Trade",
+                                      position: "insideTopLeft",
+                                      fill: "var(--foreground)",
+                                      fontSize: 10,
+                                      className: "pointer-events-none",
+                                    }
+                                  : undefined
+                              }
+                            />
+                          ) : null}
+                          {publishedDate ? (
+                            <ReferenceLine
+                              x={dateOnlyToTime(publishedDate)}
+                              stroke="var(--chart-4)"
+                              strokeDasharray="4 4"
+                              className="pointer-events-none"
+                              label={
+                                isWideChart
+                                  ? {
+                                      value: "Published",
+                                      position: "insideTopRight",
+                                      fill: "var(--foreground)",
+                                      fontSize: 10,
+                                      className: "pointer-events-none",
+                                    }
+                                  : undefined
+                              }
+                            />
+                          ) : null}
+                          <Line
+                            dataKey="close"
+                            type="monotone"
+                            stroke="var(--chart-1)"
+                            strokeWidth={isWideChart ? 2 : 2.5}
+                            dot={false}
+                            activeDot={{ r: isWideChart ? 4 : 5 }}
                           />
-                        ) : null}
-                        <Line
-                          dataKey="close"
-                          type="monotone"
-                          stroke="var(--chart-1)"
-                          strokeWidth={isWideChart ? 2 : 2.5}
-                          dot={false}
-                          activeDot={{ r: isWideChart ? 4 : 5 }}
-                        />
-                      </LineChart>
-                    </ChartContainer>
+                        </LineChart>
+                      </ChartContainer>
+                    </div>
                     <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 px-1 text-[11px] text-muted-foreground sm:hidden">
-                      {tradePoint ? (
+                      {tradeDate ? (
                         <ChartMarker color="var(--chart-2)" label="Trade date" />
                       ) : null}
-                      {publishedPoint ? (
+                      {publishedDate ? (
                         <ChartMarker
                           color="var(--chart-4)"
                           label="Published date"
